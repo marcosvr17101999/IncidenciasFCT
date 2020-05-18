@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+	<ui:define name="contenido">
+	<h:messages id="messages" globalOnly="true" layout="table"
+				infoClass="info" errorClass="advertencia"></h:messages>
+	<h:form id="frmigetautoriniciales" prependId="false">
+		<fieldset>
+			<legend>Búsqueda del Autor a Borrar</legend>			
+						<h:outputText value="Iniciales:"></h:outputText>
+						<h:inputText id="inicialesAutor"
+							value="#{backingEliminarAutor.inicialesBuscarAutor}">
+							<f:ajax event="keyup"
+								listener="#{backingEliminarAutor.sociosPorNombreAjax}"
+								render=" :frmAutores"/>
+						</h:inputText>
+		</fieldset>
+		</h:form>
+		<h:form id="frmAutores" prependId="false">
+				<h:panelGroup rendered="#{backingEliminarAutor.totalAutoresCandidatos>0}">
+					<h:selectOneRadio value="#{backingEliminarAutor.autorBorrar}">
+						<f:selectItems value="#{backingEliminarAutor.listadoAutores}"
+							var="autor" itemValue="#{autor.idautor}"
+							itemLabel="#{autor.nombre}"></f:selectItems>
+							<h:commandButton value="Borrar">
+						<f:ajax listener="#{backingEliminarAutor.borrarAutor()}"
+							execute="@form" render="@form :messages" />
+							
+					</h:commandButton>
+					</h:selectOneRadio>
+				</h:panelGroup>
+				<!-- <h:panelGroup id="eliminarAutoresCheckbox" rendered="#{backingEliminarAutor.totalAutoresCandidatos>0}">
+					<h:selectManyCheckbox 
+						value="#{backingEliminarAutor.listadoAutores}">
+						<f:selectItems value="#{backingEliminarAutor.listadoAutores}"
+							var="autor" itemValue="#{autor.idautor}"
+							itemLabel="#{autor.nombre}"></f:selectItems>
+					</h:selectManyCheckbox>		
+				</h:panelGroup>  -->
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

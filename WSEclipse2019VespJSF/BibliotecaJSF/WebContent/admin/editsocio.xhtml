@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:define name="metadata">
+	<f:metadata>
+		<f:viewParam name="idsocio"
+			value="#{backingBusquedaSocioVersionDos.idsocio}" />
+		<f:viewParam name="pagina"
+			value="#{backingBusquedaSocioVersionDos.url}" />
+		<f:viewAction action="#{backingBusquedaSocioVersionDos.init()}" />
+	</f:metadata>
+</ui:define>
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+	<ui:define name="contenido">
+		<div id="frmeditsocio" class="formulariogeneral">
+			<h:outputText value="&nbsp;"></h:outputText>
+			<h:messages id="messages" globalOnly="true" layout="table"
+				infoClass="info" errorClass="advertencia"></h:messages>
+			<h:form id="frmigetsocioiniciales" prependId="false">
+				<fieldset>
+					<legend>Modifique los datos y pulse guardar</legend>
+					<h:panelGrid columns="3" border="0">
+						<h:outputLabel for="frmeditsocionombre" value="Nombre:" />
+						<h:inputText id="frmeditsocionombre"
+							value="#{backingBusquedaSocioVersionDos.socioseleccionado.nombre}"
+							label="Nombre">
+						</h:inputText>
+						<h:message id="msgeditsocionombre" for="frmeditsocionombre"
+							errorClass="advertencia" />
+						<h:outputLabel for="frmeditsociodireccion" value="Direccion" />
+						<h:inputText id="frmeditsociodireccion"
+							value="#{backingBusquedaSocioVersionDos.socioseleccionado.direccion}"
+							size="30" required="true" requiredMessage="Campo obligatorio">
+						</h:inputText>
+						<h:message id="msgeditdireccion" for="frmeditsociodireccion"
+							errorClass="advertencia" />
+						<h:outputText value=""></h:outputText>
+						<h:panelGroup>
+							<h:commandButton value="Guardar"
+								action="#{backingBusquedaSocioVersionDos.actualizarSocioSeleccionado()}">
+								<f:ajax execute="@form" render="@form messages" />
+							</h:commandButton>
+							<h:commandButton value="Cancelar"
+								action="#{backingBusquedaSocioVersionDos.cancelar()}" immediate="true">
+							</h:commandButton>
+
+						</h:panelGroup>
+					</h:panelGrid>
+				</fieldset>
+			</h:form>
+		</div>
+		<div>&nbsp;</div>
+	</ui:define>
+</ui:composition>
+</html>

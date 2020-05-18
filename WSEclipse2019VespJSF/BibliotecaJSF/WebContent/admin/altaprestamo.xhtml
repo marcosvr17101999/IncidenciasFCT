@@ -1,0 +1,42 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+	<ui:define name="contenido">
+		<div id="altaPrestamo" class="formulariogeneral">
+			<h:form id="frmPrestamo" prependId="false">
+				<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+				<fieldset>
+					<legend>Nuevo Prestamo</legend>
+					<h:outputText value="#{msg['pagina.altaprestamo.nombre']}"></h:outputText>
+						<h:inputText id="NumSocio"
+							value="#{backingAltaPrestamo.prestamo.socio.idsocio}" 
+							required="true"
+							requiredMessage="Campo obligatorio">
+							
+						</h:inputText>
+						<div>&#160;</div>
+					<h:outputText value="#{msg['pagina.altaprestamo.ejemplar']}"></h:outputText>
+						<h:inputText id="NumLibro"
+							value="#{backingAltaPrestamo.prestamo.idejemplar}" 
+							required="true"
+							requiredMessage="Campo obligatorio">
+						</h:inputText>
+					<h:commandButton action="#{backingAltaPrestamo.nuevoPrestamo()}"
+							value="#{msg['generico.botonguardar']}">
+						</h:commandButton>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+<h:head>
+
+</h:head>
+<h:body>
+
+</h:body>
+</html>

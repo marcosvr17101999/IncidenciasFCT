@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+	<ui:define name="contenido">
+		<div id="altaAutor" class="formulariogeneral">
+			<h:form id="frmAltaUsuario" prependId="false">
+				<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+				<fieldset>
+					<legend>Nuevo Autor</legend>
+					<h:panelGrid title="Datos del Autor" columns="3" border="0">
+						<h:outputText value="#{msg['pagina.altaautor.nombre']}"></h:outputText>
+						<h:inputText id="nombreautor"
+							value="#{backingAltaAutor.autor.nombre}" required="true"
+							requiredMessage="#{msg['generico.campoobligatorio']}" >
+<!-- 						<f:ajax event="focusOut" render="msgAltaAutorNombre"></f:ajax> -->
+						</h:inputText>
+						<h:message for="nombreautor" errorClass="advertencia"></h:message>
+						<h:outputText value="#{msg['pagina.altaautor.fechanacimiento']}"></h:outputText>
+						<h:inputText id="fechanacimiento"
+							value="#{backingAltaAutor.autor.fechanacimiento}" 
+							required="true" pt:type="date"
+							requiredMessage="Campo obligatorio">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</h:inputText>
+						<h:message for="fechanacimiento" errorClass="advertencia"></h:message>
+						<h:outputText value=""></h:outputText>
+						<h:commandButton action="#{backingAltaAutor.nuevoAutor}"
+							value="#{msg['generico.botonguardar']}">
+						</h:commandButton>
+						
+					</h:panelGrid>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+<h:head>
+
+</h:head>
+<h:body>
+
+</h:body>
+</html>

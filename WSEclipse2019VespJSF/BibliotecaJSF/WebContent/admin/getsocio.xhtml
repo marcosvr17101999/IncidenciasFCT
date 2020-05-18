@@ -1,0 +1,84 @@
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="title">Listado de Libros</ui:define>
+	<ui:define name="contenido">
+		<div id="frmgetsocio" class="formulariogeneral">
+			<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+			<div>&#160;</div>
+			<h:form id="frmigetsocioiniciales" prependId="false">
+				<fieldset>
+					<legend>Búsqueda del Socio a modificar</legend>
+					<h:panelGrid id="pg" columns="2" border="0">
+						<h:outputText value="Iniciales:"></h:outputText>
+						<h:inputText id="iniciales"
+							value="#{backingBusquedaSocio.inicialesBuscarSocio}">
+							<f:ajax event="keyup"
+								listener="#{backingBusquedaSocio.sociosPorNombreAjax()}"
+								render=" pgnohaysocioscoincidentes resultadoBusqueda" />
+						</h:inputText>
+						<h:outputText value=""></h:outputText>
+					</h:panelGrid>
+				</fieldset>
+				<div>&#160;</div>
+				<h:panelGroup id="pgnohaysocioscoincidentes" layout="block"
+					styleClass="nohayregistroscoincidentes">
+					<h:outputText id="outnohayregistroscoincidentes"
+						value="Ningún socio coincidente con el patrón solicitado"
+						rendered="#{backingBusquedaSocio.listadoSocios!=null and backingBusquedaSocio.totalSociosCandidatos==0}" />
+				</h:panelGroup>
+				<h:panelGroup id="resultadoBusqueda" layout="block">
+					<h:dataTable id="tablasocio" name="tablasocio" var="socio"
+						value="#{backingBusquedaSocio.listadoSocios}" border="1"
+						headerClass="list-header" rowClasses="filaimpar,filapar"
+						columnClasses="just-derecha,just-centro,just-centro"
+						styleClass="tablacentrada"
+						rendered="#{backingBusquedaSocio.totalSociosCandidatos>0}">
+						<f:facet name="header">
+							<h:outputText value="Registros coincidentes"></h:outputText>
+						</f:facet>
+						<h:column id="Idsocio" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Idsocio"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{socio.idsocio}"></h:outputText>
+						</h:column>
+						<h:column id="Nombre" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Nombre"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{socio.nombre}"></h:outputText>
+						</h:column>
+						
+						<h:column id="Editar" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Editar"></h:outputText>
+							</f:facet>
+							 <h:commandLink action="#{backingBusquedaSocio.editarSocio}"
+								value="Editar">
+								<f:setPropertyActionListener
+									target="#{backingEditarSocio.socioseleccionado}"
+									value="#{socio}">
+								</f:setPropertyActionListener>
+							</h:commandLink> 
+						</h:column>
+						<h:column id="EditarConverter" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Editar v2"></h:outputText>
+							</f:facet>
+							<h:link value="Editar v2" outcome="editsocio">
+								<f:param name="idsocio" value="#{socio.idsocio}"></f:param>
+								<f:param name="pagina" value="/admin/getsocio.xhtml"></f:param>
+							</h:link>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+			</h:form>
+		</div>
+		<div>&#160;</div>
+	</ui:define>
+</ui:composition>
+</html>
+

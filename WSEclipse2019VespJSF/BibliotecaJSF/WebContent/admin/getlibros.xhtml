@@ -1,0 +1,92 @@
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">Consulta libros</ui:define>
+	<ui:define name="contenido">
+		<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+		<h:form id="frmCriteriosBusqueda" prependId="false">
+			<fieldset>
+				<legend>Listar Libros</legend>
+				<h:panelGrid id="panelConsultaLibro" columns="3" border="0">
+						<h:selectOneMenu value="#{backingListadoLibros.tipoBusqueda}" id="selectTipoBusqueda">
+							<f:selectItem itemLabel="ISBN" itemValue="isbn"/>
+							<f:selectItem itemLabel="Título" itemValue="titulo"/>
+							<f:selectItem itemLabel="Autor" itemValue="autor"/>
+						</h:selectOneMenu>
+						<h:inputText id="iniciales" value="#{backingListadoLibros.inicialesBusqueda}"></h:inputText>
+						<h:commandButton action="#{backingListadoLibros.getLibros()}" value="Buscar">
+								<f:ajax execute="@form" render="resultadoBusqueda"></f:ajax>
+						</h:commandButton>
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+		<h:panelGroup id="resultadoBusqueda" layout="block">
+			 <h:form id="frmResultadoBusqueda" prependId="false" rendered="#{not empty backingListadoLibros.resultado}">
+				<h:dataTable value="#{backingListadoLibros.resultado}" var="fila" id="restabla">
+					<h:column id="titulo" headerClass="list-header">
+						<f:facet name="header">
+							<h:outputText value="ISBN"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{fila[0]}"></h:outputText>
+					</h:column>
+					
+					<h:column id="autor" headerClass="list-header">
+						<f:facet name="header">
+							<h:outputText value="TITULO"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{fila[1]}"></h:outputText>
+					</h:column>
+					
+					<h:column id="isbn" headerClass="list-header">
+						<f:facet name="header">
+							<h:outputText value="AUTOR"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{fila[2]}"></h:outputText>
+					</h:column>
+					
+					<h:column id="totales" headerClass="list-header">
+						<f:facet name="header">
+							<h:outputText value="Totales"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{fila[3]}"></h:outputText>
+					</h:column>
+					
+					<h:column id="disponibles" headerClass="list-header">
+						<f:facet name="header">
+							<h:outputText value="Disponibles"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{fila[5]}"></h:outputText>
+					</h:column>
+					<h:column id="eliminar" headerClass="list-header">
+						<f:facet name="header">
+							<h:outputText value="Eliminar"></h:outputText>
+						</f:facet>
+						<h:commandLink
+                     action="#{backingListadoLibros.listarEjemplares(fila[0])}"
+                     value="Eliminar"/>
+					</h:column>
+					
+				</h:dataTable>
+			</h:form>	 
+		</h:panelGroup>
+		<h:panelGroup id="resultadoBusquedaEjemplares" layout="block">
+			 <h:form id="frmResultadoBusquedaEjemplares" prependId="false" rendered="#{not empty backingListadoLibros.listadoEjemplares}">
+				<h:selectManyCheckbox 
+				value="#{backingListadoLibros.seleccionEjemplar}">
+						<f:selectItems value="#{backingListadoLibros.listadoEjemplares}"
+							var="libro" itemValue="#{libro.idejemplar}"
+							itemLabel="#{libro.idejemplar}"></f:selectItems>
+							
+						<h:commandButton value="Borrar">
+						<f:ajax listener="#{backingListadoLibros.eliminarEjemplar()}"
+							execute="@form" render="@form :messages"/>
+						</h:commandButton>
+				</h:selectManyCheckbox>
+			</h:form>	 
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

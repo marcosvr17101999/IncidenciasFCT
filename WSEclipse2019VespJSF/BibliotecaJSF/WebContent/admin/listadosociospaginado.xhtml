@@ -1,0 +1,93 @@
+   <ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="title">Listado de socios</ui:define>
+	<ui:define name="contenido">
+		<h:messages id="messages" globalOnly="true" layout="table"
+			errorClass="advertencia" infoClass="info">
+		</h:messages>
+		<h:panelGroup id="panelTab" styleClass="panelTabla"
+			rendered="#{backingSocio.paginacion.itemsCount>0}" layout="block">
+			<h:form id="frmlistadosociospaginado" prependId="false">
+				
+				<div class="navegacionTabla">
+					<h:outputText
+						value="Mostrando #{backingSocio.paginacion.primerElementoPagina}..#{backingSocio.paginacion.ultimoElementoPagina} de #{backingSocio.paginacion.itemsCount}" />
+					
+					<h:commandLink id="anterior" value="Anterior"
+						rendered="#{backingSocio.paginacion.hayPaginaAnterior}">
+						<f:ajax execute="@form" render="@form"
+							listener="#{backingSocio.paginaAnterior}" />
+					</h:commandLink>
+				
+					<h:commandLink id="siguiente" value="Siguiente"
+						rendered="#{backingSocio.paginacion.hayPaginaSiguiente}">
+						<f:ajax execute="@form" render="@form"
+							listener="#{backingSocio.paginaSiguiente}" />
+					</h:commandLink>
+				
+					<h:selectOneMenu id="slctpaginacion"
+						value="#{backingSocio.slctnrpag}">
+						<f:selectItem itemLabel="5" itemValue="5" />
+						<f:selectItem itemLabel="10" itemValue="10" />
+						<f:selectItem itemLabel="15" itemValue="15" />
+						<f:selectItem itemLabel="20" itemValue="20" />
+						<f:ajax listener="#{backingSocio.resetPaginacion}" render="@form" />
+					</h:selectOneMenu>
+				</div>
+				<h:dataTable styleClass="tabla" id="tablasocios" var="socio"
+					rendered="#{not empty backingSocio.listadoSocios}"
+					value="#{backingSocio.listadoSocios}" border="1"
+					headerClass="list-header" rowClasses="filaimpar,filapar"
+					columnClasses="just-derecha,just-izquierda,just-izquierda,just-centro">
+					<f:facet name="header">
+						<h:outputText value="Listado de Socios"></h:outputText>
+					</f:facet>
+					<h:column id="IdSocio">
+						<f:facet name="header">
+							<h:outputText value="IdSocio">
+							</h:outputText>
+						</f:facet>
+						<h:outputText value="#{socio.idsocio}">
+						</h:outputText>
+					</h:column>
+					<h:column id="Nombre">
+						<f:facet name="header">
+							<h:outputText value="Nombre">
+							</h:outputText>
+						</f:facet>
+						<h:outputText value="#{socio.nombre}">
+						</h:outputText>
+					</h:column>
+					<h:column id="Direccion">
+						<f:facet name="header">
+							<h:outputText value="Direccion">
+							</h:outputText>
+						</f:facet>
+						<h:outputText value="#{socio.direccion}">
+						</h:outputText>
+					</h:column>
+					<h:column id="Editar" headerClass="list-header">
+						
+							<h:link value="Editar v2" outcome="editsocio">
+								<f:param name="idsocio" value="#{socio.idsocio}"></f:param>
+								<f:param name="pagina" value="/admin/listadosociospaginado.xhtml"></f:param>
+							</h:link>
+						
+					</h:column>
+				</h:dataTable>
+				<div>
+					<h:outputText id="pagactual"
+						value="Pagina:#{backingSocio.paginacion.pagina}" />
+					
+					<h:outputText id="regpag"
+						value="Registros por pagina: #{backingSocio.paginacion.nrpag}" />
+				</div>
+				
+			</h:form>
+		</h:panelGroup>
+		
+	</ui:define>
+</ui:composition>
