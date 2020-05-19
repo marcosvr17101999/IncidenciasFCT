@@ -6,6 +6,8 @@
 		<class>entidades.Comentario</class>
 		<class>entidades.Departamento</class>
 		<class>entidades.Estadoincidencia</class>
+		<class>entidades.Grupousuario</class>
+		<class>entidades.GrupousuarioPK</class>
 		<class>entidades.Incidencia</class>
 		<class>entidades.Prioridad</class>
 		<class>entidades.Role</class>

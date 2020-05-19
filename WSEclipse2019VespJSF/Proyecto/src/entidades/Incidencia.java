@@ -8,11 +8,19 @@ import java.util.List;
 
 /**
  * The persistent class for the INCIDENCIAS database table.
- * 
+ * @NamedQuery(name="Autor.findByName", query="select a from Autor a where UPPER(a.nombre) LIKE UPPER(:nombre)"),
+
  */
+
 @Entity
 @Table(name="INCIDENCIAS")
-@NamedQuery(name="Incidencia.findAll", query="SELECT i FROM Incidencia i")
+
+@NamedQueries({
+@NamedQuery(name="Incidencia.findAll", query="SELECT i FROM Incidencia i"),
+
+@NamedQuery(name="Incidencia.findByTipo", query="SELECT inc FROM Incidencia inc where UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
+
+})
 public class Incidencia implements Serializable {
 	private static final long serialVersionUID = 1L;
 

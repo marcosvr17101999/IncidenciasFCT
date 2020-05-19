@@ -32,7 +32,20 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<Comentario> comentarios;
 
-	//uni-directional many-to-many association to Role
+	//bi-directional one-to-one association to Grupousuario
+	@OneToOne(mappedBy="usuario")
+	private Grupousuario grupousuario;
+
+	//bi-directional many-to-one association to Incidencia
+	@OneToMany(mappedBy="usuarioBean")
+	private List<Incidencia> incidencias;
+
+	//bi-directional many-to-one association to Departamento
+	@ManyToOne
+	@JoinColumn(name="DEPARTAMENTO")
+	private Departamento departamentoBean;
+
+	//bi-directional many-to-many association to Role
 	@ManyToMany
 	@JoinTable(
 		name="GRUPOUSUARIOS"
@@ -44,15 +57,6 @@ public class Usuario implements Serializable {
 			}
 		)
 	private List<Role> roles;
-
-	//bi-directional many-to-one association to Incidencia
-	@OneToMany(mappedBy="usuarioBean")
-	private List<Incidencia> incidencias;
-
-	//bi-directional many-to-one association to Departamento
-	@ManyToOne
-	@JoinColumn(name="DEPARTAMENTO")
-	private Departamento departamentoBean;
 
 	public Usuario() {
 	}
@@ -127,12 +131,12 @@ public class Usuario implements Serializable {
 		return comentario;
 	}
 
-	public List<Role> getRoles() {
-		return this.roles;
+	public Grupousuario getGrupousuario() {
+		return this.grupousuario;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setGrupousuario(Grupousuario grupousuario) {
+		this.grupousuario = grupousuario;
 	}
 
 	public List<Incidencia> getIncidencias() {
@@ -163,6 +167,14 @@ public class Usuario implements Serializable {
 
 	public void setDepartamentoBean(Departamento departamentoBean) {
 		this.departamentoBean = departamentoBean;
+	}
+
+	public List<Role> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 }
