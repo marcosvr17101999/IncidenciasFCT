@@ -70,7 +70,7 @@ public class BackingListadoIncidencias implements Serializable{
 	@PostConstruct
 	public void ini() {
 		if (paginacion == null) {
-			paginacion = new PaginacionHelper(5, 0) {
+			paginacion = new PaginacionHelper(getSlctnrpag(), 0) {
 				@Override
 				public long getItemsCount() {
 					return inService.getTotalFiltro(tipoBusqueda);
