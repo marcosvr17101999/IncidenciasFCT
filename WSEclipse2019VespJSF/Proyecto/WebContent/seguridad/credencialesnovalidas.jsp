@@ -30,7 +30,7 @@
             </tr>
             <tr>
                <td>*Password</td>
-               <td><input type="password" name="j_password" /></td>
+               <td><input type="password" name="j_password" value="backingListadoIncidencias.email"/></td>
             </tr>
             <tr>
                <td>&nbsp;</td>

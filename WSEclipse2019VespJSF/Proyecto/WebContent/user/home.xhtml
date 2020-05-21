@@ -10,13 +10,12 @@
 <h:body> 
 holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <a href="administrador/NuevoUsuario.xhtml">Nuevo Usuario</a>
-
-<a href="user/nuevaIncidencia.xhtml">Nueva Incidencia</a>
-<h:panelGroup id="panelTab" styleClass="panelTabla"
-		rendered="#{backingListadoIncidencias.paginacion.itemsCount>0}"
+	<a href="user/nuevaIncidencia.xhtml">Nueva Incidencia</a>
+	<h:panelGroup id="panelTab" styleClass="panelTabla"
+		rendered="#{backingListadoIncidencias.paginacion.itemsCount>=0}"
 		layout="block">
-		
-	<h:form>
+
+		<h:form>
 			<fieldset>
 				<legend>Listar Libros</legend>
 				<h:panelGrid id="panelConsultaLibro" columns="3" border="0">
@@ -32,9 +31,9 @@ holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 					<h:commandButton
 						action="#{backingListadoIncidencias.getEstadoIncidenciaFiltrada()}"
 						value="Buscar">
-						<f:ajax execute="@form" 
-						listener="#{backingListadoIncidencias.resetPaginacion}"
-						render="@all"></f:ajax>
+						<f:ajax execute="@form"
+							listener="#{backingListadoIncidencias.resetPaginacion}"
+							render="@all"></f:ajax>
 					</h:commandButton>
 
 				</h:panelGrid>
@@ -78,7 +77,31 @@ holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 					<h:outputText value="#{socio.estadoincidencia.descripcionEstado}">
 					</h:outputText>
 				</h:column>
-
+				<h:column id="detalleDepartamento">
+					<f:facet name="header">
+						<h:outputText value="detalleDepartamento">
+						</h:outputText>
+					</f:facet>
+					<h:outputText value="#{socio.departamento.detalleDepartamento}">
+					</h:outputText>
+				</h:column>
+				
+				<h:column id="Prioridad">
+					<f:facet name="header">
+						<h:outputText value="Prioridad">
+						</h:outputText>
+					</f:facet>
+					<h:outputText value="#{socio.prioridadBean.descripcionPrioridad}">
+					</h:outputText>
+				</h:column>
+				<h:column id="usuario">
+					<f:facet name="header">
+						<h:outputText value="usuario">
+						</h:outputText>
+					</f:facet>
+					<h:outputText value="#{socio.usuarioBean.email}">
+					</h:outputText>
+				</h:column>
 
 
 			</h:dataTable>
@@ -92,13 +115,13 @@ holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 				<h:commandLink id="anterior" value="Anterior">
 					<f:ajax execute="@form" render="@all"
-					rendered="#{backingListadoIncidencias.paginacion.hayPaginaAnterior}"
+						rendered="#{backingListadoIncidencias.paginacion.hayPaginaAnterior}"
 						listener="#{backingListadoIncidencias.paginaAnterior()}" />
 				</h:commandLink>
 
 				<h:commandLink id="siguiente" value="Siguiente">
 					<f:ajax execute="@form" render="@all"
-					rendered="#{backingListadoIncidencias.paginacion.hayPaginaAnterior}"
+						rendered="#{backingListadoIncidencias.paginacion.hayPaginaAnterior}"
 						listener="#{backingListadoIncidencias.paginaSiguiente()}" />
 				</h:commandLink>
 
@@ -114,7 +137,7 @@ holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 			</div>
 
 
-	</h:form>
+		</h:form>
 	</h:panelGroup>
 </h:body>
 </html>

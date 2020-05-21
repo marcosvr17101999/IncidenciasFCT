@@ -9,6 +9,8 @@ import java.util.List;
 /**
  * The persistent class for the INCIDENCIAS database table.
  * @NamedQuery(name="Autor.findByName", query="select a from Autor a where UPPER(a.nombre) LIKE UPPER(:nombre)"),
+ * 
+@NamedQuery(name="Incidencia.findByTipo", query="SELECT inc FROM Incidencia inc where UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) or UPPER(INC.usuarioBean.email) LIKE UPPER(:email) ")
 
  */
 
@@ -17,8 +19,9 @@ import java.util.List;
 
 @NamedQueries({
 @NamedQuery(name="Incidencia.findAll", query="SELECT i FROM Incidencia i"),
-
-@NamedQuery(name="Incidencia.findByTipo", query="SELECT inc FROM Incidencia inc where UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
+@NamedQuery(name="Incidencia.findByTipo", query="SELECT inc FROM Incidencia inc where UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) "),
+@NamedQuery(name="Incidencia.findByUser", query="SELECT inc FROM Incidencia inc where UPPER(inc.usuarioBean.email) LIKE UPPER(:email) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
+@NamedQuery(name="Incidencia.findByDepartamento", query="SELECT inc FROM Incidencia inc where UPPER(INC.departamento.detalleDepartamento) LIKE UPPER(:departamento) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) OR UPPER(inc.usuarioBean.email) LIKE UPPER(:email) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
 
 })
 public class Incidencia implements Serializable {

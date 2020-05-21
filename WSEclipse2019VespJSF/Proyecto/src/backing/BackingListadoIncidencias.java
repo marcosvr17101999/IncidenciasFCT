@@ -2,36 +2,40 @@ package backing;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import entidades.Incidencia;
 import services.IncidenciasService;
 import util.PaginacionHelper;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class BackingListadoIncidencias implements Serializable{
-
-	/**
-	 * 
-	 */
+	
+	
 	private static final long serialVersionUID = 1072552360870918593L;
 	Incidencia i=new Incidencia();
 	List<Incidencia>listadoIncidencias=null;
-	List<Incidencia>listadoIncidenciasPag=null;
 	private String tipoBusqueda="%";
 	
+	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	String username = ec.getRemoteUser();
+		
 	
 	public List<Incidencia> getListadoIncidencias() {
 		return listadoIncidencias;
 	}
-	public List<Incidencia> getListadoIncidenciasPag() {
-		return listadoIncidenciasPag;
-	}
+	
 	public IncidenciasService getInService() {
 		return inService;
 	}
@@ -39,9 +43,7 @@ public class BackingListadoIncidencias implements Serializable{
 	public void setListadoIncidencias(List<Incidencia> listadoIncidencias) {
 		this.listadoIncidencias = listadoIncidencias;
 	}
-	public void setListadoIncidenciasPag(List<Incidencia> listadoIncidenciasPag) {
-		this.listadoIncidenciasPag = listadoIncidenciasPag;
-	}
+	
 	public void setInService(IncidenciasService inService) {
 		this.inService = inService;
 	}
@@ -73,11 +75,11 @@ public class BackingListadoIncidencias implements Serializable{
 			paginacion = new PaginacionHelper(getSlctnrpag(), 0) {
 				@Override
 				public long getItemsCount() {
-					return inService.getTotalFiltro(tipoBusqueda);
+					return inService.getTotalFiltro(tipoBusqueda,username);
 				}
 			};
 		}
-		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),paginacion.getNrpag(),tipoBusqueda);
+		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),paginacion.getNrpag(),tipoBusqueda,username);
 	}
 	public PaginacionHelper getPaginacion() {
 		return paginacion;
@@ -98,7 +100,7 @@ public class BackingListadoIncidencias implements Serializable{
 	/***************************************************************************/
 	public long getTotalInc() {
 		resetPaginacion();
-		return inService.getTotalFiltro(tipoBusqueda);
+		return inService.getTotalFiltro(tipoBusqueda,username);
 	}
 
 	/********************************************************************/
@@ -106,7 +108,7 @@ public class BackingListadoIncidencias implements Serializable{
 	
 		paginacion.getPaginaAnterior();
 		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),
-				paginacion.getNrpag(),tipoBusqueda);
+				paginacion.getNrpag(),tipoBusqueda,username);
 	
 		
 	}
@@ -116,7 +118,7 @@ public class BackingListadoIncidencias implements Serializable{
 		
 		paginacion.getPaginaSiguiente();
 		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),
-				paginacion.getNrpag(),tipoBusqueda);
+				paginacion.getNrpag(),tipoBusqueda,username);
 		
 	}
 
@@ -131,16 +133,17 @@ public class BackingListadoIncidencias implements Serializable{
 		 * los registros por pagina. EL valor seleccionado esta asociado a la propiedad
 		 * slctnrpag de nuestro backing bean.
 		 */
-		
 		int nuevapagina = (paginacion.getPrimerElementoPagina() / slctnrpag);
 		paginacion.setNrpag(slctnrpag);
 		paginacion.setPagina(nuevapagina);
 		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),
-				paginacion.getNrpag(),tipoBusqueda);
+				paginacion.getNrpag(),tipoBusqueda,username);
 	}
 	/**************************************************************************/
 	public void getEstadoIncidenciaFiltrada() {
 		paginacion=null;
 		ini();
-	}
+		System.out.println(listadoIncidencias.size()+"-");
+			}
+	
 }
