@@ -10,7 +10,11 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Departamento.findAll", query="SELECT d FROM Departamento d")
+@NamedQueries({
+@NamedQuery(name="Departamento.findAll", query="SELECT d FROM Departamento d "),
+@NamedQuery(name="Departamento.findId", query="SELECT d FROM Departamento d where UPPER(d.idDepartamento) LIKE UPPER(:id)")
+
+})
 public class Departamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 

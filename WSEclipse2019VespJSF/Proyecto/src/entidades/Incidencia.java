@@ -16,9 +16,10 @@ import java.util.List;
 
 @Entity
 @Table(name="INCIDENCIAS")
-
 @NamedQueries({
-@NamedQuery(name="Incidencia.findAll", query="SELECT i FROM Incidencia i"),
+	@NamedQuery(name="Incidencia.findById", query="SELECT i FROM Incidencia i where UPPER(i.idIncidencia) LIKE UPPER(:id)"),
+
+@NamedQuery(name="Incidencia.findAll", query="SELECT i FROM Incidencia i order by i.idIncidencia DESC"),
 @NamedQuery(name="Incidencia.findByTipo", query="SELECT inc FROM Incidencia inc where UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) "),
 @NamedQuery(name="Incidencia.findByUser", query="SELECT inc FROM Incidencia inc where UPPER(inc.usuarioBean.email) LIKE UPPER(:email) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
 @NamedQuery(name="Incidencia.findByDepartamento", query="SELECT inc FROM Incidencia inc where UPPER(INC.departamento.detalleDepartamento) LIKE UPPER(:departamento) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) OR UPPER(inc.usuarioBean.email) LIKE UPPER(:email) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),

@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="COMENTARIOS")
-@NamedQuery(name="Comentario.findAll", query="SELECT c FROM Comentario c")
+@NamedQuery(name="Comentario.findAll", query="SELECT c FROM Comentario c order by c.idcomentario DESC")
 public class Comentario implements Serializable {
 	private static final long serialVersionUID = 1L;
 

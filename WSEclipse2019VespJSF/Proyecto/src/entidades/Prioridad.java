@@ -10,7 +10,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Prioridad.findAll", query="SELECT p FROM Prioridad p")
+@NamedQueries({
+@NamedQuery(name="Prioridad.findAll", query="SELECT p FROM Prioridad p"),
+@NamedQuery(name="Prioridad.findAllbyId", query="SELECT p FROM Prioridad p where UPPER(p.idPrioridad) LIKE (:id)")
+})
 public class Prioridad implements Serializable {
 	private static final long serialVersionUID = 1L;
 

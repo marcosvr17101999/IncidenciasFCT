@@ -8,9 +8,10 @@
 
 </h:head>
 <h:body> 
-holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-<a href="administrador/NuevoUsuario.xhtml">Nuevo Usuario</a>
-	<a href="user/nuevaIncidencia.xhtml">Nueva Incidencia</a>
+<a href="/Proyecto/administrador/NuevoUsuario.xhtml">Nuevo Usuario</a>
+	<a href="/Proyecto/user/nuevaIncidencia.xhtml">Nueva Incidencia</a>
+	
+	<a href="/Proyecto/manager/AperturaIncidencia.xhtml">Edicion Incidencia</a>
 	<h:panelGroup id="panelTab" styleClass="panelTabla"
 		rendered="#{backingListadoIncidencias.paginacion.itemsCount>=0}"
 		layout="block">
@@ -102,7 +103,20 @@ holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 					<h:outputText value="#{socio.usuarioBean.email}">
 					</h:outputText>
 				</h:column>
-
+				<h:column id="apertura">
+					<f:facet name="header">
+						<h:outputText value="Apertura">
+						</h:outputText>
+					</f:facet>
+						<h:commandLink action="#{backingListadoIncidencias.editarIncidencia()}"
+								value="Editar">
+								<f:setPropertyActionListener
+									target="#{backingModificacionIncidencia.i}"
+									value="#{socio}">
+								</f:setPropertyActionListener>
+							</h:commandLink> 
+			
+				</h:column>
 
 			</h:dataTable>
 

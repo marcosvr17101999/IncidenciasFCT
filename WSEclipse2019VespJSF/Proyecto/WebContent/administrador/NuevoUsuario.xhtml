@@ -50,7 +50,7 @@
 						var="rol" itemValue="#{rol.idRoles}" itemLabel="#{rol.detalleRoles}" />
 					<f:ajax render="@form" />
 				</h:selectOneMenu>
-				<h:outputText value="Departamento" rendered="#{not empty backingNuevoUsuario.listadoDepartamentos and registarUsuarioBean.idRol==3}"></h:outputText>
+				<h:outputText value="Departamento" rendered="#{not empty backingNuevoUsuario.listadoDepartamentos and backingNuevoUsuario.idRol==3}"></h:outputText>
 				<h:selectOneMenu value="#{backingNuevoUsuario.idDepartamento}"
 					rendered="#{not empty backingNuevoUsuario.listadoDepartamentos and backingNuevoUsuario.idRol==3}">
 					<f:selectItem itemLabel="--Seleccione un departamento--" itemValue="0" />

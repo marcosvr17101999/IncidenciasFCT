@@ -1,19 +1,11 @@
 package backing;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import entidades.Incidencia;
 import services.IncidenciasService;
@@ -21,43 +13,41 @@ import util.PaginacionHelper;
 
 @Named
 @RequestScoped
-public class BackingListadoIncidencias implements Serializable{
-	
-	
+public class BackingEdicionIncidencia {
 	private static final long serialVersionUID = 1072552360870918593L;
 	Incidencia i=new Incidencia();
 	List<Incidencia>listadoIncidencias=null;
-	private String tipoBusqueda="%";
+	private String tipoBusqueda="1";
+	@EJB
+	IncidenciasService incService;
 	
-	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	String username = ec.getRemoteUser();
-		
-	
+	public Incidencia getI() {
+		return i;
+	}
 	public List<Incidencia> getListadoIncidencias() {
 		return listadoIncidencias;
-	}
-	
-	public IncidenciasService getInService() {
-		return inService;
-	}
-	
-	public void setListadoIncidencias(List<Incidencia> listadoIncidencias) {
-		this.listadoIncidencias = listadoIncidencias;
-	}
-	
-	public void setInService(IncidenciasService inService) {
-		this.inService = inService;
 	}
 	public String getTipoBusqueda() {
 		return tipoBusqueda;
 	}
+	public IncidenciasService getIncService() {
+		return incService;
+	}
+	public void setI(Incidencia i) {
+		this.i = i;
+	}
+	public void setListadoIncidencias(List<Incidencia> listadoIncidencias) {
+		this.listadoIncidencias = listadoIncidencias;
+	}
 	public void setTipoBusqueda(String tipoBusqueda) {
 		this.tipoBusqueda = tipoBusqueda;
 	}
-	@EJB
-	 IncidenciasService inService;
-	
-	
+	public void setIncService(IncidenciasService incService) {
+		this.incService = incService;
+	}
+	public BackingEdicionIncidencia() {
+		// TODO Auto-generated constructor stub
+	}
 	private PaginacionHelper paginacion;
 	private int slctnrpag = 5;
 	public int getSlctnrpag() {
@@ -66,9 +56,7 @@ public class BackingListadoIncidencias implements Serializable{
 	public void setSlctnrpag(int slctnrpag) {
 		this.slctnrpag = slctnrpag;
 	}
-	public BackingListadoIncidencias() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@PostConstruct
 	public void ini() {
@@ -76,11 +64,13 @@ public class BackingListadoIncidencias implements Serializable{
 			paginacion = new PaginacionHelper(getSlctnrpag(), 0) {
 				@Override
 				public long getItemsCount() {
-					return inService.getTotalFiltro(tipoBusqueda,username);
+					return incService.getTotalFiltro2(tipoBusqueda);
 				}
 			};
 		}
-		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),paginacion.getNrpag(),tipoBusqueda,username);
+		
+		listadoIncidencias = incService.listadoIncidencias2(paginacion.getPagina() * paginacion.getNrpag(),paginacion.getNrpag(),tipoBusqueda);
+		System.out.println("-"+listadoIncidencias.size());
 	}
 	public PaginacionHelper getPaginacion() {
 		return paginacion;
@@ -94,32 +84,38 @@ public class BackingListadoIncidencias implements Serializable{
 	}
 	/*************************************************************************/
 	public int getTotalIncFil() {
+		paginacion=null;
+		ini();
 		resetPaginacion();
 		return (listadoIncidencias != null) ? listadoIncidencias.size() : 0;
 	}
 
 	/***************************************************************************/
 	public long getTotalInc() {
+		paginacion=null;
+		ini();
 		resetPaginacion();
-		return inService.getTotalFiltro(tipoBusqueda,username);
+		return incService.getTotalFiltro2(tipoBusqueda);
 	}
 
 	/********************************************************************/
 	public void paginaAnterior() {
-	
+		paginacion=null;
+		ini();
 		paginacion.getPaginaAnterior();
-		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),
-				paginacion.getNrpag(),tipoBusqueda,username);
+		listadoIncidencias = incService.listadoIncidencias2(paginacion.getPagina() * paginacion.getNrpag(),
+				paginacion.getNrpag(),tipoBusqueda);
 	
 		
 	}
 
 	/*********************************************************************/
 	public void paginaSiguiente() {
-		
+		paginacion=null;
+		ini();
 		paginacion.getPaginaSiguiente();
-		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),
-				paginacion.getNrpag(),tipoBusqueda,username);
+		listadoIncidencias = incService.listadoIncidencias2(paginacion.getPagina() * paginacion.getNrpag(),
+				paginacion.getNrpag(),tipoBusqueda);
 		
 	}
 
@@ -137,16 +133,13 @@ public class BackingListadoIncidencias implements Serializable{
 		int nuevapagina = (paginacion.getPrimerElementoPagina() / slctnrpag);
 		paginacion.setNrpag(slctnrpag);
 		paginacion.setPagina(nuevapagina);
-		listadoIncidencias = inService.listadoIncidencias(paginacion.getPagina() * paginacion.getNrpag(),
-				paginacion.getNrpag(),tipoBusqueda,username);
+		listadoIncidencias = incService.listadoIncidencias2(paginacion.getPagina() * paginacion.getNrpag(),
+				paginacion.getNrpag(),tipoBusqueda);
 	}
 	/**************************************************************************/
 	public void getEstadoIncidenciaFiltrada() {
 		paginacion=null;
 		ini();
-		//System.out.println(listadoIncidencias.size()+"-");
 			}
-	public String editarIncidencia() {
-		return "/user/EditarIncidencia.xhtml&faces-redirect=true";
-	}
+	
 }

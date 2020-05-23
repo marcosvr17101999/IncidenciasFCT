@@ -1,0 +1,82 @@
+<!DOCTYPE html > 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+<h:head>
+
+<f:metadata>
+		<f:viewParam name="idIncidencia"
+			value="#{backingModificacionIncidencia.i}" />
+		
+	</f:metadata>
+</h:head> 
+<h:body> 
+SECCION 1<br></br>
+DATOS DE LA INCIDENCIA<br></br>
+idIncidencia --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.idIncidencia}"></h:outputText><br></br>
+detalleDepartamento --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.departamento.detalleDepartamento}"></h:outputText><br></br>
+descripcionEstado --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.estadoincidencia.descripcionEstado}"></h:outputText><br></br>
+fechaIncidencia --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.fechaIncidencia}"></h:outputText><br></br>
+detalleIncidencia --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.detalleIncidencia}"></h:outputText><br></br>
+descripcionPrioridad --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.prioridadBean.descripcionPrioridad}"></h:outputText><br></br>
+email --------><br></br>
+<h:outputText value="#{backingModificacionIncidencia.i.usuarioBean.email}"></h:outputText><br></br>
+<br></br>
+
+SECCION 2<br></br>
+COMENTARIOS<br></br>
+<h:form id="frmResultadoBusquedaIncidencias" prependId="false">
+			<h:dataTable styleClass="tabla" id="tablasocios" var="socio"
+				value="#{backingModificacionIncidencia.i.comentarios}">
+				<f:facet name="header">
+					<h:outputText value="Listado de Socios"></h:outputText>
+				</f:facet>
+				<h:column id="detallesComentario">
+					<f:facet name="header">
+						<h:outputText value="detallesComentario">
+						</h:outputText>
+					</f:facet>
+					<h:outputText value="#{socio.detallesComentario}">
+					</h:outputText>
+				</h:column>
+				<h:column id="fechaComentario">
+					<f:facet name="header">
+						<h:outputText value="detallesComentario">
+						</h:outputText>
+					</f:facet>
+					<h:outputText value="#{socio.fechaComentario}">
+					</h:outputText>
+				</h:column>
+				<h:column id="emailComentario">
+					<f:facet name="header">
+						<h:outputText value="detallesComentario">
+						</h:outputText>
+					</f:facet>
+					<h:outputText value="#{socio.usuario.email}">
+					</h:outputText>
+				</h:column>
+				
+
+			</h:dataTable>
+
+		</h:form> 
+<br></br>
+SECCION 3<br></br>
+FORMULARIO MODIFICACION<br></br>
+<h:commandButton id="mostrar"
+						action="#{backingModificacionIncidencia.guardarVariable()}"
+						value="Buscar">
+						<f:ajax execute="@form"
+							listener="#{backingListadoIncidencias.resetPaginacion}"
+							render="@all"></f:ajax>
+					</h:commandButton>
+</h:body> 
+</html>

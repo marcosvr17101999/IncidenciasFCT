@@ -25,10 +25,16 @@ public class DepartamentoService {
 
 	@SuppressWarnings("unchecked")
 	public List<Departamento> getDepartamentoById(int id) {
-		return em.createQuery("Select d from Departamento d where d.iddepartamento=:id").setParameter("id", id)
+		String id1=String.valueOf(id);
+		return em.createNamedQuery("Departamento.findId").setParameter("id", id1)
 				.getResultList();
 	}
-
+	@SuppressWarnings("unchecked")
+	public List<Departamento> getDepartamentoById(Long id) {
+		String id1=String.valueOf(id);
+		return em.createNamedQuery("Departamento.findId").setParameter("id", id1)
+				.getResultList();
+	}
 	@SuppressWarnings("unchecked")
 	public List<Departamento> getDepartamentos() {
 		return em.createNamedQuery("Departamento.findAll").getResultList();
