@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -159,6 +160,7 @@ public class IncidenciasService {
 			throw rbe;
 		}
     }
+  
     public void actualizarIncidencia(Incidencia i)throws RollbackException {
 		try {
 			em.merge(i);

@@ -15,10 +15,12 @@ import java.util.List;
 
 import entidades.Comentario;
 import entidades.Departamento;
+import entidades.Estadoincidencia;
 import entidades.Incidencia;
 import entidades.Usuario;
 import services.ComentarioService;
 import services.DepartamentoService;
+import services.EstadoService;
 import services.IncidenciasService;
 import services.UsuarioService;
 
@@ -90,6 +92,8 @@ public class BackingAbrirIncidencia implements Serializable{
 	ComentarioService comSerivce;
 	@EJB
 	DepartamentoService depService;
+	@EJB
+	EstadoService estService;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -145,10 +149,16 @@ public class BackingAbrirIncidencia implements Serializable{
     	c.setIncidencia(i);
     	c.setUsuario(u);
     	c.setIdcomentario(co);
+    	String l=String.valueOf(2);
+    	Estadoincidencia es=estService.getEstado(l).get(0);
     	try {
-    		incService.actualizarIncidencia(i);
     		System.out.println(i.getDepartamento().getIdDepartamento());
     		comSerivce.newComentario(c);
+    		i.setEstadoincidencia(es);
+    		
+    		
+    		incService.actualizarIncidencia(i);
+    		
     	FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro creado con éxito",
 				"Registro creado con éxito"));
@@ -160,5 +170,11 @@ public class BackingAbrirIncidencia implements Serializable{
 	context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensaje, mensaje));
 }
     	
+	}
+	public EstadoService getEstService() {
+		return estService;
+	}
+	public void setEstService(EstadoService estService) {
+		this.estService = estService;
 	}
 }

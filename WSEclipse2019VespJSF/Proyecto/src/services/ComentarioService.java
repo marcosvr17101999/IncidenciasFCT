@@ -31,6 +31,7 @@ public class ComentarioService {
     }
     public void newComentario(Comentario c) {
     	try {
+    		
     		em.persist(c);
 		} catch (RollbackException e) {
 			// TODO: handle exception

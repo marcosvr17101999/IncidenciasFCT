@@ -20,7 +20,7 @@ import services.IncidenciasService;
 import util.PaginacionHelper;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class BackingListadoIncidencias implements Serializable{
 	
 	

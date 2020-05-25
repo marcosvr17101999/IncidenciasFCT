@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +28,7 @@ import java.util.List;
 @NamedQuery(name="Incidencia.findByDepartamento", query="SELECT inc FROM Incidencia inc where UPPER(INC.departamento.detalleDepartamento) LIKE UPPER(:departamento) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) OR UPPER(inc.usuarioBean.email) LIKE UPPER(:email) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
 
 })
-public class Incidencia implements Serializable {
+public class Incidencia implements Serializable, Comparable<Comentario>{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -90,6 +93,7 @@ public class Incidencia implements Serializable {
 	}
 
 	public List<Comentario> getComentarios() {
+		this.comentarios.sort(Comparator.comparing(Comentario::getFechaComentario));
 		return this.comentarios;
 	}
 
@@ -143,4 +147,16 @@ public class Incidencia implements Serializable {
 		this.usuarioBean = usuarioBean;
 	}
 
+	@Override
+	public int compareTo(Comentario o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+
+	
+	
+	
+	
 }

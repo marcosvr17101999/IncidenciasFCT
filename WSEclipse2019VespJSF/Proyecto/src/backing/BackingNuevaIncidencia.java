@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -26,7 +27,7 @@ import services.PrioriodadService;
 import services.UsuarioService;
 
 @Named
-@ViewScoped
+@RequestScoped
 public class BackingNuevaIncidencia implements Serializable{
 
 	/**
