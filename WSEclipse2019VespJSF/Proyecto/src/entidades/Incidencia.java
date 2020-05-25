@@ -28,7 +28,7 @@ import java.util.List;
 @NamedQuery(name="Incidencia.findByDepartamento", query="SELECT inc FROM Incidencia inc where UPPER(INC.departamento.detalleDepartamento) LIKE UPPER(:departamento) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo) OR UPPER(inc.usuarioBean.email) LIKE UPPER(:email) AND UPPER(inc.estadoincidencia.idEstado) LIKE UPPER(:tipo)"),
 
 })
-public class Incidencia implements Serializable, Comparable<Comentario>{
+public class Incidencia implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -93,7 +93,7 @@ public class Incidencia implements Serializable, Comparable<Comentario>{
 	}
 
 	public List<Comentario> getComentarios() {
-		this.comentarios.sort(Comparator.comparing(Comentario::getFechaComentario));
+		this.comentarios.sort(Comparator.comparing(Comentario::getFechaComentario).reversed());
 		return this.comentarios;
 	}
 
@@ -147,11 +147,7 @@ public class Incidencia implements Serializable, Comparable<Comentario>{
 		this.usuarioBean = usuarioBean;
 	}
 
-	@Override
-	public int compareTo(Comentario o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	
 

@@ -21,7 +21,7 @@ import services.RolesService;
 import services.UsuarioService;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class BackingNuevoUsuario implements Serializable {
 	/**
 	 * 

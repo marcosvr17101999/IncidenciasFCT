@@ -1,15 +1,15 @@
-<!DOCTYPE html > 
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-<style>
+	<style>
 <!--
 textarea {
-    resize: none;
+	resize: none;
 	max-height: 16px;
 	max-width: 350px;
 	min-height: 16px;
@@ -18,91 +18,230 @@ textarea {
 -->
 </style>
 
-<f:metadata>
-		<f:viewParam name="idincidencia"
+	<f:metadata>
+		<f:viewParam name="idIncidencia"
 			value="#{backingModificacionIncidencia.idIncidencia}" />
 		<f:viewParam name="incidencia"
 			value="#{backingModificacionIncidencia.i}" />
-			<f:viewAction action="#{backingModificacionIncidencia.init()}" />
-	
-			</f:metadata>
-</h:head> 
+		<f:viewAction action="#{backingModificacionIncidencia.init()}" />
+
+	</f:metadata>
+</h:head>
 <h:body> 
+
+<a href="../user/home.xhtml">Inicio</a>
+<h:panelGroup id="panel">
+<div>
 SECCION 1<br></br>
 DATOS DE LA INCIDENCIA<br></br>
 idIncidencia --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.idIncidencia}"></h:outputText><br></br>
+	<h:outputText value="#{backingModificacionIncidencia.i.idIncidencia}"></h:outputText>
+	<br></br>
 detalleDepartamento --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.departamento.detalleDepartamento}"></h:outputText><br></br>
+	<h:outputText
+		value="#{backingModificacionIncidencia.i.departamento.detalleDepartamento}"></h:outputText>
+	<br></br>
 descripcionEstado --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.estadoincidencia.descripcionEstado}"></h:outputText><br></br>
+	<h:outputText
+		value="#{backingModificacionIncidencia.i.estadoincidencia.descripcionEstado}"></h:outputText>
+	<br></br>
 fechaIncidencia --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.fechaIncidencia}"></h:outputText><br></br>
+	<h:outputText
+		value="#{backingModificacionIncidencia.i.fechaIncidencia}"></h:outputText>
+	<br></br>
 detalleIncidencia --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.detalleIncidencia}"></h:outputText><br></br>
+	<h:outputText
+		value="#{backingModificacionIncidencia.i.detalleIncidencia}"></h:outputText>
+	<br></br>
 descripcionPrioridad --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.prioridadBean.descripcionPrioridad}"></h:outputText><br></br>
+	<h:outputText
+		value="#{backingModificacionIncidencia.i.prioridadBean.descripcionPrioridad}"></h:outputText>
+	<br></br>
 email --------><br></br>
-<h:outputText value="#{backingModificacionIncidencia.i.usuarioBean.email}"></h:outputText><br></br>
-<br></br>
+	<h:outputText
+		value="#{backingModificacionIncidencia.i.usuarioBean.email}"></h:outputText>
+	<br></br>
+	<br></br>
+</div>
 
+<div>
 SECCION 2<br></br>
 COMENTARIOS<br></br>
-<h:form id="frmResultadoBusquedaIncidencias" prependId="false">
-			<h:dataTable styleClass="tabla" id="tablasocios" var="socio"
-				value="#{backingModificacionIncidencia.i.comentarios}">
+<h:panelGroup id="resultadoBusqueda">
+	<h:form id="frmResultadoBusquedaIncidencias" >
+		<h:dataTable var="socio" value="#{backingModificacionIncidencia.i.comentarios}"  >
+			<f:facet name="header">
+				<h:outputText value="Listado de Socios"></h:outputText>
+			</f:facet>
+			<h:column id="idComentario">
 				<f:facet name="header">
-					<h:outputText value="Listado de Socios"></h:outputText>
+					<h:outputText value="detallesComentario">
+					</h:outputText>
 				</f:facet>
-				<h:column id="idComentario">
-					<f:facet name="header">
-						<h:outputText value="detallesComentario">
-						</h:outputText>
-					</f:facet>
-					<h:outputText value="#{socio.idcomentario}">
+				<h:outputText value="#{socio.idcomentario}">
+				</h:outputText>
+			</h:column>
+			<h:column id="detallesComentario">
+				<f:facet name="header">
+					<h:outputText value="detallesComentario">
 					</h:outputText>
-				</h:column>
-				<h:column id="detallesComentario">
-					<f:facet name="header">
-						<h:outputText value="detallesComentario">
-						</h:outputText>
-					</f:facet>
-					<h:outputText value="#{socio.detallesComentario}">
+				</f:facet>
+				<h:outputText value="#{socio.detallesComentario}">
+				</h:outputText>
+			</h:column>
+			<h:column id="fechaComentario">
+				<f:facet name="header">
+					<h:outputText value="detallesComentario">
 					</h:outputText>
-				</h:column>
-				<h:column id="fechaComentario">
-					<f:facet name="header">
-						<h:outputText value="detallesComentario">
-						</h:outputText>
-					</f:facet>
-					<h:outputText value="#{socio.fechaComentario}">
+				</f:facet>
+				<h:outputText value="#{socio.fechaComentario}">
+				</h:outputText>
+			</h:column>
+			<h:column id="emailComentario">
+				<f:facet name="header">
+					<h:outputText value="detallesComentario">
 					</h:outputText>
-				</h:column>
-				<h:column id="emailComentario">
-					<f:facet name="header">
-						<h:outputText value="detallesComentario">
-						</h:outputText>
-					</f:facet>
-					<h:outputText value="#{socio.usuario.email}">
-					</h:outputText>
-				</h:column>
-				
-
-			</h:dataTable>
-
-		</h:form> 
-<br></br>
+				</f:facet>
+				<h:outputText value="#{socio.usuario.email}">
+				</h:outputText>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	<br></br>
+	
+	</h:panelGroup>
+	</div>
+	</h:panelGroup>
+	<div>
 SECCION 3<br></br>
 FORMULARIO MODIFICACION<br></br>
+	<h:form>
 Comentario:
-	<h:inputTextarea id="asun" value="#{backingAbrirIncidencia.comentario}"></h:inputTextarea>
-	<h:outputText value="#{backingAbrirIncidencia.i.estadoincidencia}"></h:outputText>
-<h:commandButton id="mostrar"
-						action="#{backingModificacionIncidencia.guardarVariable()}"
-						value="Buscar">
-						<f:ajax execute="@form"
-							listener="#{backingListadoIncidencias.resetPaginacion}"
-							render="@all"></f:ajax>
-					</h:commandButton>
-</h:body> 
+	<h:inputTextarea id="asun"
+			value="#{backingModificacionIncidencia.comentario}"></h:inputTextarea>
+		<h:outputText value="--#{backingModificacionIncidencia.u.email}"></h:outputText>
+
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1}">
+			
+			<f:selectItem itemLabel="Nueva" itemValue="1" />
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:selectItem itemLabel="Rechazada" itemValue="6" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==3}">
+			
+
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:selectItem itemLabel="Espera" itemValue="2" />
+			<f:selectItem itemLabel="Resuelta" itemValue="4" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==2}">
+		
+
+			<f:selectItem itemLabel="Espera" itemValue="2" />
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==4}">
+		
+
+			<f:selectItem itemLabel="resuelta" itemValue="4" />
+			<f:selectItem itemLabel="Cerrada" itemValue="5" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+
+		<h:selectOneMenu
+			value="#{backingModificacionIncidencia.idDepartamento}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado!=1}">
+			<f:selectItem itemLabel="--Seleccione un departamento--"
+				itemDisabled="true" />
+			<f:selectItems
+				value="#{backingModificacionIncidencia.listadoDepartamentos}"
+				var="departamento" itemValue="#{departamento.idDepartamento}"
+				itemLabel="#{departamento.detalleDepartamento}" />
+		</h:selectOneMenu>
+
+<!--                         IDROL2                        -->
+<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1}">
+		
+			<f:selectItem itemLabel="Nueva" itemValue="1" />
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:selectItem itemLabel="Rechazada" itemValue="6" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==3}">
+			
+
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:selectItem itemLabel="Espera" itemValue="2" />
+			<f:selectItem itemLabel="Resuelta" itemValue="4" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==2}">
+			
+
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:selectItem itemLabel="Espera" itemValue="2" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==4}">
+			<f:selectItem itemLabel="resuelta" itemValue="4" />
+			<f:selectItem itemLabel="Cerrada" itemValue="5" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		<h:selectOneMenu
+			value="#{backingModificacionIncidencia.idDepartamento}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado!=1}">
+			<f:selectItem itemLabel="--Seleccione un departamento--"
+				itemDisabled="true" />
+			<f:selectItems
+				value="#{backingModificacionIncidencia.listadoDepartamentos}"
+				var="departamento" itemValue="#{departamento.idDepartamento}"
+				itemLabel="#{departamento.detalleDepartamento}" />
+		</h:selectOneMenu>
+
+<!--                         IDROL3                        -->
+
+
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==3 and backingModificacionIncidencia.i.estadoincidencia.idEstado==3}">
+			
+
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:selectItem itemLabel="Espera" itemValue="2" />
+			<f:selectItem itemLabel="Resuelta" itemValue="4" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==3 and backingModificacionIncidencia.i.estadoincidencia.idEstado==2}">
+			
+
+			<f:selectItem itemLabel="Espera" itemValue="2" />
+			<f:selectItem itemLabel="Abierta" itemValue="3" />
+			<f:ajax render="@all" />
+		</h:selectOneMenu>
+		
+<!--                         IDROL4                        -->	
+		<h:commandButton id="mostrar"
+			action="#{backingModificacionIncidencia.guardarVariable()}"
+			value="Buscar" >
+				<f:ajax execute="@form" render="@all resultadoBusqueda "></f:ajax>
+		</h:commandButton>
+		<h:commandButton update="resultadoBusqueda" id="resultadoBusqueda" value="Button" action="#{backingModificacionIncidencia.guardarVariable()}"/>
+			
+		<h:messages globalOnly="true" infoClass="advertencia"></h:messages>
+	</h:form>
+	</div>
+</h:body>
 </html>

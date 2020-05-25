@@ -2,13 +2,13 @@ package backing;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.RollbackException;
 
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +25,7 @@ import services.IncidenciasService;
 import services.UsuarioService;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class BackingAbrirIncidencia implements Serializable{
 	/**
 	 * 

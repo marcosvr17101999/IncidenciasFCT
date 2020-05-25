@@ -119,6 +119,10 @@
 									target="#{backingModificacionIncidencia.i.idIncidencia}"
 									value="#{socio.idIncidencia}">
 								</f:setPropertyActionListener>
+								<h:link value="Editar v2" outcome="EditarIncidencia">
+								<f:param name="idIncidencia" value="#{socio.idIncidencia}"></f:param>
+								<f:param name="incidencia" value="#{socio}"></f:param>
+							</h:link>
 							</h:commandLink> 
 			
 				</h:column>

@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,6 +30,12 @@ public class ComentarioService {
     	Query consulta1 = em.createNamedQuery("Comentario.findAll");
     	Comentario i=(Comentario) consulta1.getResultList().get(0);
     	return i.getIdcomentario();
+    }
+    @SuppressWarnings("unchecked")
+	public List<Comentario> getComen(String id) {
+    	Query consulta1 = em.createNamedQuery("Comentario.findCo");
+    	 List<Comentario> i= consulta1.setParameter("id", id).getResultList();
+    	return i ;
     }
     public void newComentario(Comentario c) {
     	try {

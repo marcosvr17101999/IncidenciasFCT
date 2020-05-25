@@ -36,9 +36,9 @@ textarea {
 				
 				<h:outputText value="Asunto"></h:outputText>
 				
-				<h:inputTextarea id="asun" value="#{backingNuevaIncidencia.asunto}"></h:inputTextarea>
+				<h:inputTextarea required="true" id="asun" value="#{backingNuevaIncidencia.asunto}"></h:inputTextarea>
 				<h:outputText value="Descripción"></h:outputText>
-				<h:inputTextarea id="descr" value="#{backingNuevaIncidencia.descrip}"></h:inputTextarea>
+				<h:inputTextarea required="true" id="descr" value="#{backingNuevaIncidencia.descrip}"></h:inputTextarea>
 				<h:commandButton
 					action="#{backingNuevaIncidencia.nuevaIncidencia()}"
 					value="Registrar">

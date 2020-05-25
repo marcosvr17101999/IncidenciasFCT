@@ -3,6 +3,7 @@ package backing;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.SessionScoped;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -27,7 +28,7 @@ import services.PrioriodadService;
 import services.UsuarioService;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class BackingNuevaIncidencia implements Serializable{
 
 	/**

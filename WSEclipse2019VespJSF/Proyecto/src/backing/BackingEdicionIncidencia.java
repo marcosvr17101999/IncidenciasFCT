@@ -1,5 +1,6 @@
 package backing;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -7,13 +8,14 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import javax.enterprise.context.SessionScoped;
 import entidades.Incidencia;
 import services.IncidenciasService;
 import util.PaginacionHelper;
 
 @Named
-@RequestScoped
-public class BackingEdicionIncidencia {
+@SessionScoped
+public class BackingEdicionIncidencia implements Serializable {
 	private static final long serialVersionUID = 1072552360870918593L;
 	Incidencia i=new Incidencia();
 	List<Incidencia>listadoIncidencias=null;
