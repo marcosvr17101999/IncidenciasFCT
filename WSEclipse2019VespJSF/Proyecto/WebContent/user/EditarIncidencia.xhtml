@@ -156,7 +156,7 @@ Comentario:
 
 		<h:selectOneMenu
 			value="#{backingModificacionIncidencia.idDepartamento}"
-			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado!=1}">
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado==3}">
 			<f:selectItem itemLabel="--Seleccione un departamento--"
 				itemDisabled="true" />
 			<f:selectItems
@@ -200,7 +200,7 @@ Comentario:
 		</h:selectOneMenu>
 		<h:selectOneMenu
 			value="#{backingModificacionIncidencia.idDepartamento}"
-			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado!=1}">
+			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado==3}}">
 			<f:selectItem itemLabel="--Seleccione un departamento--"
 				itemDisabled="true" />
 			<f:selectItems
@@ -236,8 +236,6 @@ Comentario:
 			value="Buscar" >
 				<f:ajax execute="@form" render="@all resultadoBusqueda "></f:ajax>
 		</h:commandButton>
-		<h:commandButton update="resultadoBusqueda" id="resultadoBusqueda" value="Button" action="#{backingModificacionIncidencia.guardarVariable()}"/>
-			
 		<h:messages globalOnly="true" infoClass="advertencia"></h:messages>
 	</h:form>
 	</div>

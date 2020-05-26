@@ -146,16 +146,23 @@ public class IncidenciasService {
     	i.setFechaIncidencia(date);
     	i.setIdIncidencia(id);
     	i.setEstadoincidencia(es);
+    	
+    	
     	Comentario c=new Comentario();
     	c.setFechaComentario(date);
     	c.setDetallesComentario(descrip);
     	c.setIncidencia(i);
     	c.setUsuario(u);
     	c.setIdcomentario(com);
+    	
     	try {
     		
     		em.persist(i);
     		em.persist(c);
+    		List<Comentario>comentarios=i.getComentarios();
+        	comentarios.add(c);
+        	i.setComentarios(comentarios);
+    		em.persist(i);
 		}catch (RollbackException rbe) {
 			throw rbe;
 		}
@@ -168,4 +175,36 @@ public class IncidenciasService {
 			throw e;
 		}
 	}
+    @SuppressWarnings("unchecked")
+   	public List<Incidencia> listadoIncidencias3(int primerResultado, int maxResultados,String tipo,String tipo2) { 
+        	List<Incidencia> listaIncidencia = new ArrayList<Incidencia>();
+        	Query consulta1 = em.createNamedQuery("Incidencia.findByTipo2");
+   		 listaIncidencia = consulta1.setParameter("tipo",tipo).setParameter("tipo2",tipo2).setFirstResult(primerResultado).setMaxResults(maxResultados).getResultList();	
+   		 return listaIncidencia;
+   	}
+    @SuppressWarnings("unchecked")
+   	public long getTotalFiltro3(String tipo,String tipo2) {
+           
+        	List<Incidencia> listaIncidencia = new ArrayList<Incidencia>();
+        	Query consulta1 = em.createNamedQuery("Incidencia.findByTipo2");
+   		 listaIncidencia = consulta1.setParameter("tipo",tipo).setParameter("tipo2",tipo2).getResultList();
+       	
+       	
+   		 return listaIncidencia.size();
+       	
+   	}
+    public void eliminarIncidencia(Long a) {
+    	System.out.println(a+" si estoy entrando mirame ---------------");
+    
+		Incidencia i=em.find(Incidencia.class,a);
+		System.out.println(i.getIdIncidencia()+"----------------id que se recibe en paquete");
+    	if(i!=null) {
+		em.remove(i);
+			
+			}
+    	
+				
+		
+		
+}
 }

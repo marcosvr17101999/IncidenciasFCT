@@ -164,6 +164,9 @@ public class BackingNuevaIncidencia implements Serializable{
 		Usuario u=usuService.getUsuarioById(username).get(0);
 		Long com=comService.getUlt()+1;
 		//System.out.println(com);
+		System.out.println(u.getEmail()+"email");
+		System.out.println(p.getDescripcionPrioridad()+"prioridad");
+		System.out.println(idinc+"eee");
     	Estadoincidencia es=estService.getEstado("1").get(0);
 		try {
 			  incService.nuevaIncidencia(asunto,p,descrip,u,idinc,es,com);

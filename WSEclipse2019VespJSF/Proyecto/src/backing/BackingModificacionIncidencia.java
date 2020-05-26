@@ -197,6 +197,8 @@ public class BackingModificacionIncidencia implements Serializable {
 		}
 		
 		Long co=comService.getUlt()+1;
+		System.out.println(co+"--------a-----------a");
+		
 		Date date = new Date();
 		
 		Usuario u=usuService.getUsuarioById(username).get(0);
@@ -206,18 +208,29 @@ public class BackingModificacionIncidencia implements Serializable {
     	c.setIncidencia(i);
     	c.setUsuario(u);
     	c.setIdcomentario(co);
-    	String l=String.valueOf(estado);
+    	String l;
+    	if(estado!=null) {
+    	l=String.valueOf(estado);
+    	System.out.println("estado no nulo");
+    	}else {
+    		System.out.println("estado  nulo");
+        		
+        		Long l2=i.getEstadoincidencia().getIdEstado();
+        				l=String.valueOf(l2);
+    	}
+    	System.out.println(l+"es qaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     	Estadoincidencia es=estService.getEstado(l).get(0);
 		
+    	List<Comentario> list=i.getComentarios();
+		list.add(c);
+		i.setComentarios(list);
 		
+		i.setEstadoincidencia(es);
 		System.out.println(i.getIdIncidencia()+"---------IdIncidencia");
 		try {
-    		System.out.println(i.getDepartamento().getIdDepartamento());
+    		
     		comService.newComentario(c);
-    		List<Comentario> list=i.getComentarios();
-    		list.add(c);
-    		i.setComentarios(list);
-    		i.setEstadoincidencia(es);	
+    			
     		incService.actualizarIncidencia(i);
     		for (Comentario comentario : i.getComentarios()) {
     			System.out.println(comentario.getIdcomentario()+"------"+comentario.getDetallesComentario());

@@ -41,4 +41,17 @@ public class UsuarioService {
 	public List<Usuario> getUsuarioById(String email) {
     	return em.createQuery("Select u from Usuario u where u.email=:email").setParameter("email", email).getResultList();
     }
+    public Usuario getUsuario(String user) {
+    	Usuario u=em.find(Usuario.class,user);
+    	return u;
+    }
+    public void updatePassword(String password, String username) {
+    	Usuario u=em.find(Usuario.class, username);
+    	u.setPassword(password);
+    	try {
+    		em.merge(u);
+    	}catch(RollbackException rbe) {
+    		throw rbe;
+    	}
+    }
 }

@@ -11,9 +11,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import entidades.Incidencia;
+import entidades.Usuario;
 import services.IncidenciasService;
+import services.UsuarioService;
 import util.PaginacionHelper;
 
 @Named
@@ -23,6 +26,7 @@ public class BackingListadoIncidencias implements Serializable{
 	
 	private static final long serialVersionUID = 1072552360870918593L;
 	Incidencia i=new Incidencia();
+	Usuario u;
 	List<Incidencia>listadoIncidencias=null;
 	private String tipoBusqueda="%";
 	
@@ -66,9 +70,11 @@ public class BackingListadoIncidencias implements Serializable{
 	public BackingListadoIncidencias() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@EJB
+UsuarioService uS;
 	@PostConstruct
 	public void ini() {
+		u=uS.getUsuario(username);
 		if (paginacion == null) {
 			paginacion = new PaginacionHelper(getSlctnrpag(), 0) {
 				@Override
@@ -145,5 +151,49 @@ public class BackingListadoIncidencias implements Serializable{
 			}
 	public String editarIncidencia() {
 		return "/user/EditarIncidencia.xhtml&faces-redirect=true";
+	}
+	public void salir() {
+		System.out.println("salir");
+	ec.invalidateSession();
+	}
+
+	public Incidencia getI() {
+		return i;
+	}
+
+	public Usuario getU() {
+		return u;
+	}
+
+	public ExternalContext getEc() {
+		return ec;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public UsuarioService getuS() {
+		return uS;
+	}
+
+	public void setI(Incidencia i) {
+		this.i = i;
+	}
+
+	public void setU(Usuario u) {
+		this.u = u;
+	}
+
+	public void setEc(ExternalContext ec) {
+		this.ec = ec;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setuS(UsuarioService uS) {
+		this.uS = uS;
 	}
 }
