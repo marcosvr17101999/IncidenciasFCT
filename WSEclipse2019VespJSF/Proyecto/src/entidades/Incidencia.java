@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 
 import java.util.Collections;
@@ -86,7 +88,16 @@ public class Incidencia implements Serializable{
 	}
 
 	public Date getFechaIncidencia() {
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yy");
+
+		formateador.format(fechaIncidencia);
 		return this.fechaIncidencia;
+	}
+	public String getFechaIncidenciaF() {
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yy");
+
+		return formateador.format(fechaIncidencia);
+		 
 	}
 
 	public void setFechaIncidencia(Date fechaIncidencia) {

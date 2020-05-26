@@ -1,50 +1,62 @@
-<!DOCTYPE html > 
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
-	
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
 <h:head>
-<style>
+	<link rel="stylesheet" href="/Proyecto/resources/css/estilos.css" />
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+	<style>
 textarea {
-    resize: none;
+	resize: none;
 	max-height: 150px;
 	max-width: 250px;
 	min-height: 150px;
 	min-width: 250px;
 }
 </style>
-	
-</h:head> 
-<h:body> 
 
+</h:head>
+<h:body>
+	<div class="enlaces col-12 justify-content-center">
 
-<a href="../user/home.xhtml">Inicio</a>
-<h:form>
+		<a href="../user/home.xhtml">Inicio</a>
+	</div>
+	<div class="container">
+		<h:form class="justify-content-center  col-12 row">
 			<h:messages globalOnly="true" infoClass="advertencia"></h:messages>
-			<h:panelGrid>
-			
-				
-				<h:outputText value="Prioridad"></h:outputText>
-			<h:selectOneMenu value="#{backingNuevaIncidencia.idprioridad}">
-					<f:selectItem itemLabel="--Seleccione una prioridad--" itemValue="0" />
+			<h:panelGrid class="col-12 p justify-content-center">
+
+<br></br>
+				<h1 id="nInc" >NUEVA INCIDENCIA</h1>
+				<br></br>
+				<br></br>
+				<h:selectOneMenu value="#{backingNuevaIncidencia.idprioridad}">
+					<f:selectItem itemLabel="--Seleccione una prioridad--"
+						itemValue="0" />
 					<f:selectItems value="#{backingNuevaIncidencia.listadoPrioridad}"
 						var="priodidad" itemValue="#{priodidad.idPrioridad}"
 						itemLabel="#{priodidad.descripcionPrioridad}" />
 				</h:selectOneMenu>
-				
+
 				<h:outputText value="Asunto"></h:outputText>
-				
-				<h:inputTextarea required="true" id="asun" value="#{backingNuevaIncidencia.asunto}"></h:inputTextarea>
+
+				<h:inputTextarea required="true" id="asun"
+					value="#{backingNuevaIncidencia.asunto}"></h:inputTextarea>
 				<h:outputText value="Descripción"></h:outputText>
-				<h:inputTextarea required="true" id="descr" value="#{backingNuevaIncidencia.descrip}"></h:inputTextarea>
+				<h:inputTextarea required="true" id="descr"
+					value="#{backingNuevaIncidencia.descrip}"></h:inputTextarea>
 				<h:commandButton
 					action="#{backingNuevaIncidencia.nuevaIncidencia()}"
-					value="Registrar">
-					<f:ajax execute="@form"	render="@all"></f:ajax>
+					value="Nueva Incidencia">
+					<f:ajax execute="@form" render="@all"></f:ajax>
 				</h:commandButton>
 			</h:panelGrid>
 		</h:form>
-</h:body> 
+	</div>
+</h:body>
 </html>

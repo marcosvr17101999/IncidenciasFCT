@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -64,7 +66,12 @@ public class Comentario implements Serializable {
 	public void setFechaComentario(Date fechaComentario) {
 		this.fechaComentario = fechaComentario;
 	}
+	public String getFechaComentarioF() {
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yy");
 
+		return formateador.format(fechaComentario);
+		 
+	}
 	public Incidencia getIncidencia() {
 		return this.incidencia;
 	}

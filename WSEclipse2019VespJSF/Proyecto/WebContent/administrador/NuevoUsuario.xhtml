@@ -5,15 +5,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"> 
 
 <h:head>
+<link rel="stylesheet"  href="/Proyecto/resources/css/estilos.css"  />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 
 </h:head> 
 <h:body> 
 
+<div class="enlaces col-12 justify-content-center">
 <a href="../user/home.xhtml">Inicio</a>
-<div>
-		<h:form>
+	</div>
+<div class="container">
+<br></br>
+
+		<h:form class="justify-content-center p col-12 row">
+		
 			<h:messages globalOnly="true" infoClass="advertencia"></h:messages>
 			<h:panelGrid>
+			<h1>Nuevo usuario</h1>
+		<br></br>
+
 				<h:outputText value="Email"></h:outputText>
 				<h:inputText value="#{backingNuevoUsuario.usuario.email}"
 					required="true" requiredMessage="Campo obligatorio">
@@ -39,7 +49,7 @@
 					required="true" requiredMessage="Campo obligatorio">
 					<f:ajax event="blur" render="msgAltaUsuarioNombre"></f:ajax>
 				</h:inputText>
-				<h:outputText value="TelĂ©fono"></h:outputText>
+				<h:outputText value="Telefono"></h:outputText>
 				<h:inputText value="#{backingNuevoUsuario.usuario.telefono}"
 					required="true" requiredMessage="Campo obligatorio">
 					<f:ajax event="blur" render="msgAltaUsuarioTelefono"></f:ajax>

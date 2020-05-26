@@ -168,6 +168,7 @@ public class BackingEliminar implements Serializable {
 
 	public void eliminar(Long id) {
 	//	Incidencia i=incService.findByID(id).get(0);
+		
 		try {
 		System.out.println("id que se pasa---------"+id);
 			incService.eliminarIncidencia(id);

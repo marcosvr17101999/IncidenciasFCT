@@ -6,28 +6,33 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
 
 <h:head>
+<link rel="stylesheet"  href="/Proyecto/resources/css/estilos.css"  />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 
 </h:head> 
 <h:body> 
-EdicionIncidencia
+<div class="enlaces col-12 justify-content-center">
+	
+	
 <a href="/Proyecto/user/home.xhtml">Inicio</a>
-<h:panelGroup id="panelTab" styleClass="panelTabla"
-		
-		layout="block">
+</div>
+<div class="container">
+<h:panelGroup id="panelTab" styleClass="panelTabla" layout="block">
 
-		
-		<h:form id="frmResultadoBusquedaIncidencias" prependId="false">
-			<h:dataTable styleClass="tabla" id="tablasocios" var="socio"
+
+		<h:form id="frmResultadoBusquedaIncidencias" prependId="false" class="justify-content-center  col-12 row">
+			<h1>Abrir Incidencias</h1>
+			<h:dataTable styleClass="tabla" id="tablaincidencias" var="incidencia"
 				value="#{backingEdicionIncidencia.listadoIncidencias}">
 				<f:facet name="header">
-					<h:outputText value="Listado de Socios"></h:outputText>
+					<h:outputText value="Listado de incidencias"></h:outputText>
 				</f:facet>
 				<h:column id="IdIncidencia">
 					<f:facet name="header">
 						<h:outputText value="IdIncidencia">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.idIncidencia}">
+					<h:outputText class="td"  value="#{incidencia.idIncidencia}">
 					</h:outputText>
 				</h:column>
 				<h:column id="detalleIncidencia">
@@ -35,7 +40,7 @@ EdicionIncidencia
 						<h:outputText value="detalleIncidencia">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.detalleIncidencia}">
+					<h:outputText class="td"  value="#{incidencia.detalleIncidencia}">
 					</h:outputText>
 				</h:column>
 				<h:column id="fechaIncidencia">
@@ -43,7 +48,7 @@ EdicionIncidencia
 						<h:outputText value="fechaIncidencia">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.fechaIncidencia}">
+					<h:outputText class="td"  value="#{incidencia.fechaIncidencia}">
 					</h:outputText>
 				</h:column>
 				<h:column id="estadoincidencia">
@@ -51,7 +56,7 @@ EdicionIncidencia
 						<h:outputText value="estadoincidencia">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.estadoincidencia.descripcionEstado}">
+					<h:outputText class="td"  value="#{incidencia.estadoincidencia.descripcionEstado}">
 					</h:outputText>
 				</h:column>
 			
@@ -61,7 +66,7 @@ EdicionIncidencia
 						<h:outputText value="Prioridad">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.prioridadBean.descripcionPrioridad}">
+					<h:outputText class="td"  value="#{incidencia.prioridadBean.descripcionPrioridad}">
 					</h:outputText>
 				</h:column>
 				<h:column id="usuario">
@@ -69,7 +74,7 @@ EdicionIncidencia
 						<h:outputText value="usuario">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.usuarioBean.email}">
+					<h:outputText class="td"  value="#{incidencia.usuarioBean.email}">
 					</h:outputText>
 				</h:column>
 
@@ -78,8 +83,8 @@ EdicionIncidencia
 						<h:outputText value="Apertura">
 						</h:outputText>
 					</f:facet>
-					<h:link value="Editar " outcome="AbrirIncidencia">
-								<f:param name="idincidencia" value="#{socio.idIncidencia}"></f:param>
+					<h:link class="td1"  value="Editar " outcome="AbrirIncidencia">
+								<f:param name="idincidencia" value="#{incidencia.idIncidencia}"></f:param>
 									</h:link>
 				</h:column>
 			</h:dataTable>
@@ -117,5 +122,6 @@ EdicionIncidencia
 
 		</h:form>
 	</h:panelGroup>
+	</div>
 </h:body> 
 </html>

@@ -6,14 +6,16 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
+<link rel="stylesheet"  href="/Proyecto/resources/css/estilos.css"  />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
 	<style>
 <!--
 textarea {
 	resize: none;
-	max-height: 16px;
-	max-width: 350px;
-	min-height: 16px;
-	min-width: 350px;
+	height: 150px;
+	width:350px;
+	
 }
 -->
 </style>
@@ -26,81 +28,84 @@ textarea {
 	</f:metadata>
 </h:head>
 <h:body> 
-
+<div class="enlaces col-12 justify-content-center">
 <a href="../user/home.xhtml">Inicio</a>
-<h:panelGroup id="panel">
-<div>
-SECCION 1<br></br>
-DATOS DE LA INCIDENCIA<br></br>
-idIncidencia --------><br></br>
-	<h:outputText value="#{backingModificacionIncidencia.i.idIncidencia}"></h:outputText>
+</div>
+<div class="container  ">
+<div class="justify-content-center row col-12">
+<div class="col-2">
+<br></br>
+<h4>DATOS DE LA INCIDENCIA</h4><br></br>
+<h5>
+IdIncidencia</h5>
+	<h:outputText class="td" value="#{backingModificacionIncidencia.i.idIncidencia}"></h:outputText>
 	<br></br>
-detalleDepartamento --------><br></br>
-	<h:outputText
+<h5>Departamento </h5>
+	<h:outputText class="td"
 		value="#{backingModificacionIncidencia.i.departamento.detalleDepartamento}"></h:outputText>
 	<br></br>
-descripcionEstado --------><br></br>
-	<h:outputText
+<h5>Estado</h5>
+	<h:outputText class="td"
 		value="#{backingModificacionIncidencia.i.estadoincidencia.descripcionEstado}"></h:outputText>
 	<br></br>
-fechaIncidencia --------><br></br>
-	<h:outputText
-		value="#{backingModificacionIncidencia.i.fechaIncidencia}"></h:outputText>
+<h5>Fecha </h5>
+	<h:outputText class="td"
+		value="#{backingModificacionIncidencia.i.fechaIncidenciaF}"></h:outputText>
 	<br></br>
-detalleIncidencia --------><br></br>
-	<h:outputText
+<h5>Detalle Incidencia</h5>
+	<h:outputText class="td"
 		value="#{backingModificacionIncidencia.i.detalleIncidencia}"></h:outputText>
 	<br></br>
-descripcionPrioridad --------><br></br>
-	<h:outputText
+<h5>Prioridad</h5>
+	<h:outputText class="td"
 		value="#{backingModificacionIncidencia.i.prioridadBean.descripcionPrioridad}"></h:outputText>
 	<br></br>
-email --------><br></br>
-	<h:outputText
+<h5>Email</h5>
+	<h:outputText class="td"
 		value="#{backingModificacionIncidencia.i.usuarioBean.email}"></h:outputText>
 	<br></br>
 	<br></br>
 </div>
 
-<div>
-SECCION 2<br></br>
-COMENTARIOS<br></br>
+<div class="col-6 p">
+<br></br>
+<h4>LISTADO COMENTARIOS</h4><br></br>
 <h:panelGroup id="resultadoBusqueda">
 	<h:form id="frmResultadoBusquedaIncidencias" >
-		<h:dataTable var="socio" value="#{backingModificacionIncidencia.i.comentarios}"  >
-			<f:facet name="header">
-				<h:outputText value="Listado de Socios"></h:outputText>
+		<h:dataTable var="incidencia" value="#{backingModificacionIncidencia.i.comentarios}" class="dt c tabla" >
+			<f:facet name="header" id="tabla">
+				<h:outputText  value="Listado de incidencias"></h:outputText>
 			</f:facet>
 			<h:column id="idComentario">
 				<f:facet name="header">
-					<h:outputText value="detallesComentario">
+					<h:outputText value="IdComentario">
 					</h:outputText>
 				</f:facet>
-				<h:outputText value="#{socio.idcomentario}">
+				<h:outputText value="#{incidencia.idcomentario}">
 				</h:outputText>
 			</h:column>
 			<h:column id="detallesComentario">
 				<f:facet name="header">
-					<h:outputText value="detallesComentario">
+					<h:outputText value="Comentario">
 					</h:outputText>
 				</f:facet>
-				<h:outputText value="#{socio.detallesComentario}">
+				<h:outputText value="#{incidencia.detallesComentario}">
 				</h:outputText>
 			</h:column>
 			<h:column id="fechaComentario">
 				<f:facet name="header">
-					<h:outputText value="detallesComentario">
+					<h:outputText value="Fecha">
 					</h:outputText>
 				</f:facet>
-				<h:outputText value="#{socio.fechaComentario}">
+				<h:outputText value="#{incidencia.fechaComentarioF}">
 				</h:outputText>
 			</h:column>
 			<h:column id="emailComentario">
 				<f:facet name="header">
-					<h:outputText value="detallesComentario">
+					<h:outputText value="Usuario">
 					</h:outputText>
 				</f:facet>
-				<h:outputText value="#{socio.usuario.email}">
+				<h:outputText value="#{incidencia.usuario.email}">
 				</h:outputText>
 			</h:column>
 		</h:dataTable>
@@ -109,16 +114,16 @@ COMENTARIOS<br></br>
 	
 	</h:panelGroup>
 	</div>
-	</h:panelGroup>
-	<div>
-SECCION 3<br></br>
-FORMULARIO MODIFICACION<br></br>
+	
+	<div class="col-4">
+<br></br>
+<h4>AÑADIR COMENTARIO</h4><br></br>
 	<h:form>
 Comentario:
+<br></br>
 	<h:inputTextarea id="asun"
 			value="#{backingModificacionIncidencia.comentario}"></h:inputTextarea>
-		<h:outputText value="--#{backingModificacionIncidencia.u.email}"></h:outputText>
-
+CAMBIAR A:	
 		<h:selectOneMenu value="#{backingModificacionIncidencia.estado}"
 			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==1 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1}">
 			
@@ -153,6 +158,7 @@ Comentario:
 			<f:selectItem itemLabel="Cerrada" itemValue="5" />
 			<f:ajax render="@all" />
 		</h:selectOneMenu>
+<br></br>
 
 		<h:selectOneMenu
 			value="#{backingModificacionIncidencia.idDepartamento}"
@@ -198,6 +204,8 @@ Comentario:
 			<f:selectItem itemLabel="Cerrada" itemValue="5" />
 			<f:ajax render="@all" />
 		</h:selectOneMenu>
+		<br></br>
+		
 		<h:selectOneMenu
 			value="#{backingModificacionIncidencia.idDepartamento}"
 			rendered="#{backingModificacionIncidencia.u.grupousuario.id.idrol==2 and backingModificacionIncidencia.i.estadoincidencia.idEstado==1 and backingModificacionIncidencia.estado==3}}">
@@ -238,6 +246,8 @@ Comentario:
 		</h:commandButton>
 		<h:messages globalOnly="true" infoClass="advertencia"></h:messages>
 	</h:form>
+	</div>
+	</div>
 	</div>
 </h:body>
 </html>

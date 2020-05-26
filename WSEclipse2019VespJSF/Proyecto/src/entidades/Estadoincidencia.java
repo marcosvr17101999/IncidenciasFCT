@@ -10,7 +10,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Estadoincidencia.findAll", query="SELECT e FROM Estadoincidencia e where UPPER(e.idEstado) LIKE UPPER(:id)")
+@NamedQueries({
+@NamedQuery(name="Estadoincidencia.findById", query="SELECT e FROM Estadoincidencia e where UPPER(e.idEstado) LIKE UPPER(:id)"),
+@NamedQuery(name="Estadoincidencia.findAll", query="SELECT e FROM Estadoincidencia e")
+})
 public class Estadoincidencia implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -1,9 +1,11 @@
 package backing;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -13,14 +15,16 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import entidades.Estadoincidencia;
 import entidades.Incidencia;
 import entidades.Usuario;
+import services.EstadoService;
 import services.IncidenciasService;
 import services.UsuarioService;
 import util.PaginacionHelper;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class BackingListadoIncidencias implements Serializable{
 	
 	
@@ -58,6 +62,24 @@ public class BackingListadoIncidencias implements Serializable{
 	@EJB
 	 IncidenciasService inService;
 	
+	public void logout(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+    	ec.invalidateSession();
+    
+   
+			try {
+				ec.redirect("/Proyecto/user/home.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+    
+		
+	}
+
+
+
 	
 	private PaginacionHelper paginacion;
 	private int slctnrpag = 5;
@@ -70,10 +92,14 @@ public class BackingListadoIncidencias implements Serializable{
 	public BackingListadoIncidencias() {
 		// TODO Auto-generated constructor stub
 	}
+	List<Estadoincidencia>listadoEstados;
 	@EJB
 UsuarioService uS;
+	@EJB
+	EstadoService estService;
 	@PostConstruct
 	public void ini() {
+		listadoEstados=estService.getAll();
 		u=uS.getUsuario(username);
 		if (paginacion == null) {
 			paginacion = new PaginacionHelper(getSlctnrpag(), 0) {
@@ -196,4 +222,22 @@ UsuarioService uS;
 	public void setuS(UsuarioService uS) {
 		this.uS = uS;
 	}
+
+	public List<Estadoincidencia> getListadoEstados() {
+		return listadoEstados;
+	}
+
+	public EstadoService getEstService() {
+		return estService;
+	}
+
+	public void setListadoEstados(List<Estadoincidencia> listadoEstados) {
+		this.listadoEstados = listadoEstados;
+	}
+
+	public void setEstService(EstadoService estService) {
+		this.estService = estService;
+	}
+	
+	
 }

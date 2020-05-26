@@ -1,0 +1,66 @@
+body{
+	background-color: white;
+	color: #111111;
+}
+*{
+    font: italic small-caps bold Georgia, sans-serif;
+}
+.c{
+	width: 100%;
+	height:5%;
+	padding: 0px;
+	margin: 0px;
+}
+.enlaces{
+	background-color: #494949;
+	color: white;
+	text-align: center;
+}
+.enlaces a{
+	color: white;
+}
+.enlaces a:hover { 
+	color: #dfdfdf;
+}
+
+.tabla{
+   width: 100%;
+   border: 1px solid #000;
+   
+}
+#frmListadoIncidencias{
+	text-align: center;
+}
+#frmListadoIncidencias a{
+	color:#111111;	
+}
+.p{
+	text-align: center;
+}
+.c thead{
+	border:1px solid #000;
+}
+.dt{
+	width: 100%;
+}
+#m{
+	text-align: center;
+}
+.preformatted {
+    white-space: pre;
+}
+#nInc{
+	font-size: 30px;
+}
+.td {
+	color: #727272;
+	font: bold;
+}
+.td1{
+	color: #494949;
+	font: bold;
+}
+.td1:hover{
+	color: #000000;
+	font: bold;
+}

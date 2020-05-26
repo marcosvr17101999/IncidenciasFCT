@@ -57,7 +57,9 @@ public class BackingModificacionIncidencia implements Serializable {
 	String comentario;
 	Long estado;
 	Incidencia i;
-
+	
+	List<Estadoincidencia>estDisp;
+	
 	private List<Departamento> listadoDepartamentos = null;
 	private List<Comentario>lisComen;
 	List<Comentario>lCom;

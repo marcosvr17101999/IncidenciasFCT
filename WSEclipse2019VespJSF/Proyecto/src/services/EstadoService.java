@@ -27,6 +27,11 @@ public class EstadoService {
     }
     @SuppressWarnings("unchecked")
    	public List<Estadoincidencia> getEstado(String id) {
-   		return em.createNamedQuery("Estadoincidencia.findAll").setParameter("id", id).getResultList();
+   		return em.createNamedQuery("Estadoincidencia.findById").setParameter("id", id).getResultList();
    	}
+    
+    @SuppressWarnings("unchecked")
+	public List<Estadoincidencia> getAll(){
+    	return em.createNamedQuery("Estadoincidencia.findAll").getResultList();
+    }
 }

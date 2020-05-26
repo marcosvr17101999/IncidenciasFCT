@@ -10,44 +10,59 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-
+<title>Ejemplo de estilos CSS en un archivo externo</title>
+<link rel="stylesheet"  href="/Proyecto/resources/css/estilos.css"  />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </h:head>
 <h:body>
-	<form>
+<div class="enlaces col-12 justify-content-center">
+	
+	
 		<c:if test="#{backingListadoIncidencias.u.grupousuario.role.idRoles==2}">
                <a href="/Proyecto/administrador/NuevoUsuario.xhtml">Nuevo Usuario</a>
-               
-		<a href="/Proyecto/manager/AperturaIncidencia.xhtml">Edicion Incidencia</a> 
+            - - - - -   
+		<a href="/Proyecto/manager/AperturaIncidencia.xhtml">Edicion Incidencia</a>  
+		   - - - - -  
             </c:if>
-		
-		<a href="/Proyecto/user/nuevaIncidencia.xhtml">Nueva Incidencia</a> 
-		<a href="/Proyecto/user/cambiarPassword.xhtml">Cambiar Contraseña</a> 
 		<c:if test="#{backingListadoIncidencias.u.grupousuario.role.idRoles==1}">
+		   - - - - -  
 		<a href="/Proyecto/administrador/Eliminar.xhtml">Eliminar</a>
-		
+		   - - - - -  
 		   <a href="/Proyecto/administrador/NuevoUsuario.xhtml">Nuevo Usuario</a>
-               
+                 - - - - -  
 		<a href="/Proyecto/manager/AperturaIncidencia.xhtml">Edicion Incidencia</a> 
+		 - - - - - 
    		</c:if>
-	</form>
+		<a href="/Proyecto/user/nuevaIncidencia.xhtml">Nueva Incidencia</a> 
+		   - - - - -  
+		<a href="/Proyecto/user/cambiarPassword.xhtml">Cambiar Contraseña</a> 
+		 - - - - -
+		
+		<h:commandLink  
+					action="#{backingListadoIncidencias.logout()}"
+						value="Salir">
+						<f:ajax execute="@form"
+							listener="#{backingListadoIncidencias.resetPaginacion}"
+							render="@all"></f:ajax>
+					</h:commandLink>
+	</div>
+	<div class="container">
 	<h:panelGroup id="panelTab" styleClass="panelTabla"
 		rendered="#{backingListadoIncidencias.paginacion.itemsCount>=0}"
 		layout="block">
-
-		<h:form>
-			<fieldset>
-				<legend>Listar Libros</legend>
-				<h:panelGrid id="panelConsultaLibro" columns="3" border="0">
+		<h:form class="col-12 p-0">
+			<br></br>
+				<legend>Incidencias Disponibles Para #{backingListadoIncidencias.u.email}</legend>
+				<h:panelGrid id="panelConsultaLibro" columns="2" border="0" class="col-12 justify-content-center tabla">
 					<h:selectOneMenu value="#{backingListadoIncidencias.tipoBusqueda}"
 						id="selectTipoBusqueda">
-						<f:selectItem itemLabel="Nueva" itemValue="1" />
-						<f:selectItem itemLabel="En espera" itemValue="2" />
-						<f:selectItem itemLabel="Abierta" itemValue="3" />
-						<f:selectItem itemLabel="Resuelta" itemValue="4" />
-						<f:selectItem itemLabel="Cerrada" itemValue="5" />
+						<f:selectItems value="#{backingListadoIncidencias.listadoEstados}"
+						var="estado" itemValue="#{estado.idEstado}"
+						itemLabel="#{estado.descripcionEstado}" />
+						
 						<f:selectItem itemLabel="Todo" itemValue="%" />
 					</h:selectOneMenu>
-					<h:commandButton
+					<h:commandButton 
 						action="#{backingListadoIncidencias.getEstadoIncidenciaFiltrada()}"
 						value="Buscar">
 						<f:ajax execute="@form"
@@ -56,52 +71,52 @@
 					</h:commandButton>
 
 				</h:panelGrid>
-			</fieldset>
+			
 		</h:form>
 		<h:form id="frmResultadoBusquedaIncidencias" prependId="false">
-			<h:dataTable styleClass="tabla" id="tablasocios" var="socio"
+			<h:dataTable styleClass="tabla" class="tabla" var="incidencia"
 				value="#{backingListadoIncidencias.listadoIncidencias}">
 				<f:facet name="header">
-					<h:outputText value="Listado de Socios"></h:outputText>
+					<h:outputText value="Listado de incidencias"></h:outputText>
 				</f:facet>
 				<h:column id="IdIncidencia">
 					<f:facet name="header">
-						<h:outputText value="IdIncidencia">
+						<h:outputText value="Id">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.idIncidencia}">
+					<h:outputText class="td" value="#{incidencia.idIncidencia}">
 					</h:outputText>
 				</h:column>
 				<h:column id="detalleIncidencia">
 					<f:facet name="header">
-						<h:outputText value="detalleIncidencia">
+						<h:outputText value="Detalle">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.detalleIncidencia}">
+					<h:outputText class="td" value="#{incidencia.detalleIncidencia}">
 					</h:outputText>
 				</h:column>
 				<h:column id="fechaIncidencia">
 					<f:facet name="header">
-						<h:outputText value="fechaIncidencia">
+						<h:outputText value="Fecha">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.fechaIncidencia}">
+					<h:outputText class="td" value="#{incidencia.fechaIncidenciaF}">
 					</h:outputText>
 				</h:column>
 				<h:column id="estadoincidencia">
 					<f:facet name="header">
-						<h:outputText value="estadoincidencia">
+						<h:outputText value="Estado">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.estadoincidencia.descripcionEstado}">
+					<h:outputText class="td" value="#{incidencia.estadoincidencia.descripcionEstado}">
 					</h:outputText>
 				</h:column>
 				<h:column id="detalleDepartamento">
 					<f:facet name="header">
-						<h:outputText value="detalleDepartamento">
+						<h:outputText value="Departamento">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.departamento.detalleDepartamento}">
+					<h:outputText class="td" value="#{incidencia.departamento.detalleDepartamento}">
 					</h:outputText>
 				</h:column>
 
@@ -110,27 +125,27 @@
 						<h:outputText value="Prioridad">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.prioridadBean.descripcionPrioridad}">
+					<h:outputText class="td" value="#{incidencia.prioridadBean.descripcionPrioridad}">
 					</h:outputText>
 				</h:column>
 				<h:column id="usuario">
 					<f:facet name="header">
-						<h:outputText value="usuario">
+						<h:outputText value="Usuario">
 						</h:outputText>
 					</f:facet>
-					<h:outputText value="#{socio.usuarioBean.email}">
+					<h:outputText class="td" value="#{incidencia.usuarioBean.email}">
 					</h:outputText>
 				</h:column>
 				<h:column id="apertura">
 					<f:facet name="header">
-						<h:outputText value="Apertura">
+						<h:outputText value="Editar">
 						</h:outputText>
 					</f:facet>
-					<h:commandLink
+					<h:commandLink  class="td1" 
 						action="#{backingListadoIncidencias.editarIncidencia()}"
 						value="Editar">
 						<f:setPropertyActionListener
-							target="#{backingModificacionIncidencia.i}" value="#{socio}">
+							target="#{backingModificacionIncidencia.i}" value="#{incidencia}">
 						</f:setPropertyActionListener>
 
 					</h:commandLink>
@@ -145,20 +160,20 @@
 
 			<div class="navegacionTabla">
 				<h:outputText
-					value="Mostrando #{backingListadoIncidencias.paginacion.primerElementoPagina}..#{backingListadoIncidencias.paginacion.ultimoElementoPagina} de #{backingListadoIncidencias.paginacion.itemsCount}" />
-
+					value="Mostrando #{backingListadoIncidencias.paginacion.primerElementoPagina} . . . #{backingListadoIncidencias.paginacion.ultimoElementoPagina} de #{backingListadoIncidencias.paginacion.itemsCount}" />
+<h:outputText value="&#160;" />
 				<h:commandLink id="anterior" value="Anterior">
 					<f:ajax execute="@form" render="@all"
 						rendered="#{backingListadoIncidencias.paginacion.hayPaginaAnterior}"
 						listener="#{backingListadoIncidencias.paginaAnterior()}" />
 				</h:commandLink>
-
+<h:outputText value="&#160;" />
 				<h:commandLink id="siguiente" value="Siguiente">
 					<f:ajax execute="@form" render="@all"
 						rendered="#{backingListadoIncidencias.paginacion.hayPaginaAnterior}"
 						listener="#{backingListadoIncidencias.paginaSiguiente()}" />
 				</h:commandLink>
-
+<h:outputText value="&#160;" />
 				<h:selectOneMenu id="slctpaginacion"
 					value="#{backingListadoIncidencias.slctnrpag}">
 					<f:selectItem itemLabel="5" itemValue="5" />
@@ -173,5 +188,7 @@
 
 		</h:form>
 	</h:panelGroup>
+	</div>
+
 </h:body>
 </html>
