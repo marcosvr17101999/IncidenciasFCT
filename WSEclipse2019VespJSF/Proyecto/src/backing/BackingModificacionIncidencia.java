@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -211,9 +214,14 @@ public class BackingModificacionIncidencia implements Serializable {
 		try {
     		System.out.println(i.getDepartamento().getIdDepartamento());
     		comService.newComentario(c);
+    		List<Comentario> list=i.getComentarios();
+    		list.add(c);
+    		i.setComentarios(list);
     		i.setEstadoincidencia(es);	
     		incService.actualizarIncidencia(i);
-    		
+    		for (Comentario comentario : i.getComentarios()) {
+    			System.out.println(comentario.getIdcomentario()+"------"+comentario.getDetallesComentario());
+    		}
     	FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro creado con éxito",
 				"Registro creado con éxito"));
@@ -223,7 +231,13 @@ public class BackingModificacionIncidencia implements Serializable {
 	String mensaje = e.getCause().getCause().getMessage();
 	FacesContext context = FacesContext.getCurrentInstance();
 	context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensaje, mensaje));
+	
+	
+	
+	
 }
+		System.out.println("eo");
+		
 	}
 	public List<Comentario> getLisComen() {
 		return lisComen;
