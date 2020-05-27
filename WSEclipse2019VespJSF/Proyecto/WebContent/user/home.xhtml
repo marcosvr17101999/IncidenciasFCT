@@ -25,19 +25,21 @@
 		   - - - - -  
             </c:if>
 		<c:if test="#{backingListadoIncidencias.u.grupousuario.role.idRoles==1}">
-		   - - - - -  
+		   
 		<a href="/Proyecto/administrador/Eliminar.xhtml">Eliminar</a>
 		   - - - - -  
 		   <a href="/Proyecto/administrador/NuevoUsuario.xhtml">Nuevo Usuario</a>
                  - - - - -  
 		<a href="/Proyecto/manager/AperturaIncidencia.xhtml">Edicion Incidencia</a> 
-		 - - - - - 
+		- - - - -  
    		</c:if>
+   	
 		<a href="/Proyecto/user/nuevaIncidencia.xhtml">Nueva Incidencia</a> 
 		   - - - - -  
 		<a href="/Proyecto/user/cambiarPassword.xhtml">Cambiar Contraseña</a> 
 		 - - - - -
-		
+		<a href="/Proyecto/user/Info.xhtml">Info</a> 
+		 - - - - -
 		<h:commandLink  
 					action="#{backingListadoIncidencias.logout()}"
 						value="Salir">
@@ -74,7 +76,7 @@
 			
 		</h:form>
 		<h:form id="frmResultadoBusquedaIncidencias" prependId="false">
-			<h:dataTable styleClass="tabla" class="tabla" var="incidencia"
+			<h:dataTable styleClass="tabla" class="tabla p" var="incidencia"
 				value="#{backingListadoIncidencias.listadoIncidencias}">
 				<f:facet name="header">
 					<h:outputText value="Listado de incidencias"></h:outputText>
